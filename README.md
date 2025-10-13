@@ -1,838 +1,1545 @@
-# CI/CD Pipeline - Task Management API# CI/CD Pipeline - Production-Grade REST API# Advanced CI/CD Pipeline - Task Management API
+# Advanced CI/CD Pipeline - Task Management API# Advanced CI/CD Pipeline - Task Management API
 
 
 
-<div align="center">
+<div align="center"><div align="center">
 
 
 
-![Tech Stack](https://skillicons.dev/icons?i=nodejs,express,postgres,redis,docker,nginx,aws,github)<div align="center">[![CI/CD Pipeline](https://github.com/username/task-api/actions/workflows/ci-cd-pipeline.yml/badge.svg)](https://github.com/username/task-api/actions/workflows/ci-cd-pipeline.yml)
+![Tech Stack](https://skillicons.dev/icons?i=nodejs,express,postgres,redis,docker,nginx,aws,github)![Tech Stack](https://skillicons.dev/icons?i=nodejs,express,postgres,redis,docker,nginx,aws,github)
 
 
 
-**Production-grade REST API with comprehensive CI/CD pipeline**[![codecov](https://codecov.io/gh/username/task-api/branch/main/graph/badge.svg)](https://codecov.io/gh/username/task-api)
+[![CI/CD Pipeline](https://github.com/username/task-api/actions/workflows/ci-cd-pipeline.yml/badge.svg)](https://github.com/username/task-api/actions/workflows/ci-cd-pipeline.yml)[![CI/CD Pipeline](https://github.com/username/task-api/actions/workflows/ci-cd-pipeline.yml/badge.svg)](https://github.com/username/task-api/actions/workflows/ci-cd-pipeline.yml)
 
+[![codecov](https://codecov.io/gh/username/task-api/branch/main/graph/badge.svg)](https://codecov.io/gh/username/task-api)[![codecov](https://codecov.io/gh/username/task-api/branch/main/graph/badge.svg)](https://codecov.io/gh/username/task-api)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[View Demo](#demo-outputs) • [Architecture](#architecture) • [Quick Start](#quick-start) • [API Docs](#api-documentation) • [Integration](#project-integration)![Node.js](https://skillicons.dev/icons?i=nodejs)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
 
 
 
----![Express](https://skillicons.dev/icons?i=express)[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+**Production-grade REST API with comprehensive CI/CD pipeline****Production-grade REST API with comprehensive CI/CD pipeline**
 
 
 
-**Part of a Full-Stack Portfolio** | **[Connect with Serverless API →](../serverless-api)**![PostgreSQL](https://skillicons.dev/icons?i=postgres)
+> Enterprise-level DevOps practices with automated testing, security scanning, and blue-green deployment> Enterprise-level DevOps practices with automated testing, security scanning, and blue-green deployment
 
 
 
-</div>![Redis](https://skillicons.dev/icons?i=redis)> Production-grade REST API with comprehensive CI/CD pipeline demonstrating enterprise-level DevOps practices
+[Architecture](#-architecture) • [Quick Start](#-quick-start) • [API Docs](#-api-documentation) • [CI/CD Pipeline](#-cicd-pipeline) • [Deployment](#-deployment)[Architecture](#-architecture) • [Quick Start](#-quick-start) • [API Docs](#-api-documentation) • [CI/CD Pipeline](#-cicd-pipeline) • [Deployment](#-deployment)
 
 
 
----![Docker](https://skillicons.dev/icons?i=docker)
+</div></div>
 
 
 
-## Table of Contents![GitHub Actions](https://skillicons.dev/icons?i=github)## 🚀 Project Overview
+------
 
 
 
-- [Overview](#overview)![AWS](https://skillicons.dev/icons?i=aws)
+## 🚀 Project Overview## 🚀 Project Overview
 
-- [Key Features](#key-features)
 
-- [Tech Stack](#tech-stack)![Nginx](https://skillicons.dev/icons?i=nginx)This project showcases an **advanced CI/CD pipeline** for a full-stack Node.js/Express REST API with PostgreSQL. It demonstrates professional DevOps practices including automated testing, security scanning, containerization, multi-environment deployment, and monitoring.
 
-- [Architecture](#architecture)
+Enterprise-level REST API demonstrating **advanced DevOps and CI/CD practices**. Features automated testing, security scanning, Docker containerization, and multi-environment deployment with blue-green strategy.Enterprise-level REST API demonstrating **advanced DevOps and CI/CD practices**. Features automated testing, security scanning, Docker containerization, and multi-environment deployment with blue-green strategy.
 
-- [Project Structure](#project-structure)
 
-- [Quick Start](#quick-start)
 
-- [API Documentation](#api-documentation)**Enterprise-grade CI/CD pipeline with automated testing, security scanning, and blue-green deployment**### Key Features
+### ✨ Key Features### ✨ Key Features
 
-- [Demo Outputs](#demo-outputs)
 
-- [CI/CD Pipeline](#cicd-pipeline)
 
-- [Testing](#testing)
+- ✅ **RESTful API** with JWT authentication- ✅ **RESTful API** with JWT authentication
 
-- [Deployment](#deployment)[Features](#features) • [Architecture](#architecture) • [Quick Start](#quick-start) • [API Documentation](#api-documentation) • [Deployment](#deployment)- ✅ **RESTful API** with JWT authentication
+- ✅ **PostgreSQL** database with proper indexing and migrations- ✅ **PostgreSQL** database with proper indexing and migrations
 
-- [Project Integration](#project-integration)
+- ✅ **Comprehensive Testing** (Unit + Integration tests with 70%+ coverage)- ✅ **Comprehensive Testing** (Unit + Integration tests with 70%+ coverage)
 
-- [Troubleshooting](#troubleshooting)- ✅ **PostgreSQL** database with proper indexing and migrations
+- ✅ **Security Scanning** (npm audit, Snyk, CodeQL, secret scanning)- ✅ **Security Scanning** (npm audit, Snyk, CodeQL, secret scanning)
 
+- ✅ **Docker** multi-stage builds with optimized images (< 200MB)- ✅ **Docker** multi-stage builds with optimized images (< 200MB)
 
+- ✅ **GitHub Actions** CI/CD with 8 pipeline stages- ✅ **GitHub Actions** CI/CD with 8 pipeline stages
 
----</div>- ✅ **Comprehensive Testing** (Unit + Integration tests with 70%+ coverage)
+- ✅ **Multi-Environment** deployment (Staging + Production)- ✅ **Multi-Environment** deployment (Staging + Production)
 
+- ✅ **Blue-Green Deployment** with automated rollback- ✅ **Blue-Green Deployment** with automated rollback
 
+- ✅ **Health Checks** and monitoring endpoints- ✅ **Health Checks** and monitoring endpoints
 
-## Overview- ✅ **Security Scanning** (npm audit, Snyk, CodeQL, secret scanning)
+- ✅ **API Documentation** with Swagger/OpenAPI- ✅ **API Documentation** with Swagger/OpenAPI
 
+- ✅ **Rate Limiting** and security best practices- ✅ **Rate Limiting** and security best practices
 
+- ✅ **Structured Logging** with Winston- ✅ **Structured Logging** with Winston
 
-Enterprise-level REST API demonstrating **advanced DevOps and CI/CD practices**. Features automated testing, security scanning, Docker containerization, and multi-environment deployment with blue-green strategy.---- ✅ **Docker** multi-stage builds with optimized images
+- ✅ **Performance Testing** with k6- ✅ **Performance Testing** with k6
 
 
 
-This project showcases:- ✅ **GitHub Actions** CI/CD with 8 pipeline stages
+------
 
-- Modern CI/CD pipeline with 8 automated stages
 
-- Production-ready code architecture## Table of Contents- ✅ **Multi-Environment** deployment (Staging + Production)
 
-- Comprehensive security practices
+## 📋 Table of Contents## 📋 Table of Contents
 
-- Scalable infrastructure design- ✅ **Blue-Green Deployment** with automated rollback
 
 
+- [Project Overview](#-project-overview)- [Project Overview](#-project-overview)
 
----- [Overview](#overview)- ✅ **Health Checks** and monitoring endpoints
+- [Tech Stack](#-tech-stack)- [Tech Stack](#-tech-stack)
 
+- [Architecture](#-architecture)- [Architecture](#-architecture)
 
+- [Prerequisites](#-prerequisites)- [Prerequisites](#-prerequisites)
 
-## Key Features- [Features](#features)- ✅ **API Documentation** with Swagger/OpenAPI
+- [Quick Start](#-quick-start)
 
+- [API Documentation](#-api-documentation)- Input validation
 
+- [Testing](#-testing)
 
-<table>- [Tech Stack](#tech-stack)- ✅ **Rate Limiting** and security best practices
+- [CI/CD Pipeline](#-cicd-pipeline)- Rate limiting- [Quick Start](#quick-start)## 📊 Architecture
 
-<tr>
+- [Deployment](#-deployment)
 
-<td width="50%">- [Architecture](#architecture)- ✅ **Structured Logging** with Winston
+- [Security](#-security)- Error handling
 
+- [Monitoring](#-monitoring)
 
+- [Project Structure](#-project-structure)- API versioning- [API Documentation](#api-documentation)
 
-**Backend & API**- [Project Structure](#project-structure)- ✅ **Performance Testing** with k6
+- [Available Scripts](#-available-scripts)
 
-- RESTful API design
+- [Troubleshooting](#-troubleshooting)
 
-- JWT authentication- [Prerequisites](#prerequisites)
 
-- Input validation
 
-- Rate limiting- [Quick Start](#quick-start)## 📊 Architecture
+---</td>- [Testing](#testing)```mermaid
 
-- Error handling
 
-- API versioning- [API Documentation](#api-documentation)
 
+## 🛠️ Tech Stack<td width="50%">
 
 
-</td>- [Testing](#testing)```mermaid
 
-<td width="50%">
+| Category | Technologies |- [CI/CD Pipeline](#cicd-pipeline)graph TB
 
-- [CI/CD Pipeline](#cicd-pipeline)graph TB
+|----------|-------------|
 
-**DevOps & Infrastructure**
+| **Runtime** | Node.js 18+, Express.js |**DevOps & Infrastructure**
 
-- Docker multi-stage builds- [Deployment](#deployment)    A[Client] --> B[Nginx Reverse Proxy]
+| **Database** | PostgreSQL 15, Redis 7 |
 
-- Docker Compose orchestration
+| **Authentication** | JWT, bcrypt |- Docker multi-stage builds- [Deployment](#deployment)    A[Client] --> B[Nginx Reverse Proxy]
 
-- Nginx reverse proxy- [Environment Variables](#environment-variables)    B --> C[Node.js API]
+| **Testing** | Jest, Supertest, k6 |
 
-- PostgreSQL + Redis
+| **Security** | Helmet, express-validator, Snyk, CodeQL, Trivy |- Docker Compose orchestration
 
-- Health checks- [Security](#security)    C --> D[PostgreSQL]
+| **CI/CD** | GitHub Actions, Docker, AWS ECS |
 
-- Graceful shutdown
+| **Monitoring** | CloudWatch, Winston Logger |- Nginx reverse proxy- [Environment Variables](#environment-variables)    B --> C[Node.js API]
 
-- [Monitoring](#monitoring)    C --> E[Redis Cache]
+| **Documentation** | Swagger/OpenAPI |
 
-</td>
+| **Containerization** | Docker, Docker Compose, Nginx |- PostgreSQL + Redis
 
-</tr>- [Troubleshooting](#troubleshooting)    C --> F[CloudWatch Logs]
 
-<tr>
 
-<td width="50%">    G[GitHub Actions] --> H[Docker Registry]
+---- Health checks- [Security](#security)    C --> D[PostgreSQL]
 
 
 
-**Testing & Quality**---    H --> I[AWS ECS Fargate]
+## 🏗️ Architecture- Graceful shutdown
 
-- Unit tests (Jest)
 
-- Integration tests    I --> C
 
-- 70%+ code coverage
+### System Architecture- [Monitoring](#monitoring)    C --> E[Redis Cache]
 
-- ESLint + Prettier## Overview```
 
-- Pre-commit hooks
 
-- Performance testing (k6)
+```mermaid</td>
 
+graph TB
 
+    subgraph "External Traffic"</tr>- [Troubleshooting](#troubleshooting)    C --> F[CloudWatch Logs]
 
-</td>A production-ready REST API demonstrating enterprise-level CI/CD practices, automated testing, security scanning, and containerized deployment. This project showcases modern DevOps workflows with GitHub Actions, Docker, and AWS infrastructure.### Tech Stack
+        Client[Client/Browser]
 
-<td width="50%">
+    end<tr>
 
+    
 
+    subgraph "Docker Network"<td width="50%">    G[GitHub Actions] --> H[Docker Registry]
 
-**CI/CD & Security**
-
-- GitHub Actions pipeline### Key Highlights| Category | Technologies |
-
-- Automated security scanning
-
-- CodeQL analysis|----------|-------------|
-
-- Secret detection
-
-- Blue-green deployment- **8-stage CI/CD pipeline** with automated quality gates| **Runtime** | Node.js 18+, Express.js |
-
-- Automated rollback
-
-- **Zero-downtime deployments** using blue-green strategy| **Database** | PostgreSQL 15, Redis 7 |
-
-</td>
-
-</tr>- **Comprehensive testing** (unit, integration, performance)| **Authentication** | JWT, bcrypt |
-
-</table>
-
-- **Security-first approach** with multiple scanning tools| **Testing** | Jest, Supertest |
-
----
-
-- **Production-ready** monitoring and logging| **Security** | Helmet, express-validator, Snyk, CodeQL |
-
-## Tech Stack
-
-- **Scalable architecture** with Docker and AWS ECS| **CI/CD** | GitHub Actions, Docker, AWS ECS |
-
-<div align="center">
-
-| **Monitoring** | CloudWatch, Sentry, New Relic |
-
-**Backend**
-
----| **Documentation** | Swagger/OpenAPI |
-
-![Node.js](https://skillicons.dev/icons?i=nodejs) ![Express](https://skillicons.dev/icons?i=express) ![JavaScript](https://skillicons.dev/icons?i=js)
-
-| **Containerization** | Docker, Docker Compose |
-
-**Database & Cache**
-
-## Features
-
-![PostgreSQL](https://skillicons.dev/icons?i=postgres) ![Redis](https://skillicons.dev/icons?i=redis)
-
-## 🛠️ Prerequisites
-
-**DevOps & Infrastructure**
-
-### Core Functionality
-
-![Docker](https://skillicons.dev/icons?i=docker) ![Nginx](https://skillicons.dev/icons?i=nginx) ![AWS](https://skillicons.dev/icons?i=aws) ![GitHub Actions](https://skillicons.dev/icons?i=github)
-
-- User authentication with JWT tokens- **Node.js** >= 18.0.0
-
-**Testing & Tools**
-
-- Task management (CRUD operations)- **npm** >= 9.0.0
-
-![Jest](https://skillicons.dev/icons?i=jest) ![Git](https://skillicons.dev/icons?i=git) ![VSCode](https://skillicons.dev/icons?i=vscode)
-
-- Image upload integration (proxy to serverless API)- **Docker** >= 20.10 and Docker Compose >= 2.0
-
-</div>
-
-- Health check endpoints with dependency status- **PostgreSQL** >= 15 (for local development without Docker)
-
----
-
-- Rate limiting and request throttling- **Git** >= 2.30
-
-## Architecture
-
-- API versioning
-
-### System Architecture
-
-## 🚦 Quick Start
-
-```mermaid
-
-graph TB### DevOps Excellence
-
-    subgraph "External Traffic"
-
-        Client[Client/Browser]- Automated CI/CD with GitHub Actions### 1. Clone the Repository
-
-    end
-
-    - Multi-stage Docker builds (< 200MB images)
-
-    subgraph "Docker Network"
-
-        Nginx[Nginx Reverse Proxy<br/>Port 80]- Database migrations and seeding```bash
+        Nginx[Nginx Reverse Proxy<br/>Port 80]
 
         API[Node.js API<br/>Express Server<br/>Port 3000]
 
-        DB[(PostgreSQL<br/>Database<br/>Port 5432)]- Blue-green deployment strategygit clone https://github.com/username/task-api.git
+        DB[(PostgreSQL<br/>Database<br/>Port 5432)]
 
-        Cache[(Redis<br/>Cache<br/>Port 6379)]
-
-    end- Automated rollback on failurecd task-api
-
-    
-
-    subgraph "Optional Integration"- Performance testing with k6```
-
-        Serverless[Serverless API<br/>AWS Lambda]
+        Cache[(Redis<br/>Cache<br/>Port 6379)]**Testing & Quality**---    H --> I[AWS ECS Fargate]
 
     end
 
-    
+    - Unit tests (Jest)
 
-    Client -->|HTTP| Nginx### Security### 2. Environment Configuration
+    subgraph "Optional Integration"
 
-    Nginx -->|Proxy| API
+        Serverless[Serverless API<br/>AWS Lambda]- Integration tests    I --> C
 
-    API -->|SQL Queries| DB- JWT-based authentication
+    end
 
-    API -->|Cache Operations| Cache
+    - 70%+ code coverage
 
-    API -.->|Image Processing| Serverless- Password hashing with bcrypt```bash
+    Client -->|HTTP| Nginx
 
-    
+    Nginx -->|Proxy| API- ESLint + Prettier## Overview```
 
-    style Nginx fill:#269B24- Helmet.js security headerscp .env.example .env
+    API -->|SQL Queries| DB
+
+    API -->|Cache Operations| Cache- Pre-commit hooks
+
+    API -.->|Image Processing| Serverless
+
+    - Performance testing (k6)
+
+    style Nginx fill:#269B24
 
     style API fill:#68A063
 
-    style DB fill:#336791- Rate limiting per IP# Edit .env with your configuration
+    style DB fill:#336791
 
-    style Cache fill:#DC382D
+    style Cache fill:#DC382D</td>A production-ready REST API demonstrating enterprise-level CI/CD practices, automated testing, security scanning, and containerized deployment. This project showcases modern DevOps workflows with GitHub Actions, Docker, and AWS infrastructure.### Tech Stack
 
-    style Serverless fill:#FF9900- Input validation and sanitization```
+    style Serverless fill:#FF9900
 
-```
+```<td width="50%">
 
-- Security vulnerability scanning
 
-### CI/CD Pipeline Architecture
 
-- Container security scanning### 3. Using Docker Compose (Recommended)
+### CI/CD Pipeline Flow
 
-```mermaid
+
+
+```mermaid**CI/CD & Security**
 
 graph LR
 
-    A[Code Push] --> B[Linting<br/>ESLint]
+    A[Code Push] --> B[Linting<br/>ESLint]- GitHub Actions pipeline### Key Highlights| Category | Technologies |
 
-    B --> C[Security Scan<br/>npm audit<br/>Snyk<br/>CodeQL]### Observability```bash
+    B --> C[Security Scan<br/>npm audit<br/>Snyk<br/>CodeQL]
 
-    C --> D[Unit Tests<br/>Jest]
+    C --> D[Unit Tests<br/>Jest]- Automated security scanning
 
-    D --> E[Build Docker<br/>Multi-stage]- Structured logging with Winston# Start all services
+    D --> E[Build Docker<br/>Multi-stage]
 
-    E --> F[Integration Tests<br/>Supertest]
+    E --> F[Integration Tests<br/>Supertest]- CodeQL analysis|----------|-------------|
 
-    F --> G[Performance Tests<br/>k6]- Health check endpointsdocker-compose up -d
+    F --> G[Performance Tests<br/>k6]
 
-    G --> H[Deploy Staging<br/>AWS ECS]
+    G --> H[Deploy Staging<br/>AWS ECS]- Secret detection
 
-    H --> I{Health Check<br/>Pass?}- Database connection monitoring
+    H --> I{Health Check<br/>Pass?}
 
-    I -->|Yes| J[Deploy Production<br/>Blue-Green]
+    I -->|Yes| J[Deploy Production<br/>Blue-Green]- Blue-green deployment- **8-stage CI/CD pipeline** with automated quality gates| **Runtime** | Node.js 18+, Express.js |
 
-    I -->|No| K[Rollback]- Redis connection monitoring# View logs
+    I -->|No| K[Rollback]
 
-    J --> L[Smoke Tests]
+    J --> L[Smoke Tests]- Automated rollback
 
-    L --> M{Success?}- Swagger/OpenAPI documentationdocker-compose logs -f api
+    L --> M{Success?}
 
-    M -->|Yes| N[Complete]
+    M -->|Yes| N[Complete]- **Zero-downtime deployments** using blue-green strategy| **Database** | PostgreSQL 15, Redis 7 |
 
     M -->|No| O[Auto Rollback]
 
-    
+    </td>
 
-    style A fill:#4078c0---# Stop services
+    style A fill:#4078c0
 
-    style C fill:#d73a49
+    style C fill:#d73a49</tr>- **Comprehensive testing** (unit, integration, performance)| **Authentication** | JWT, bcrypt |
 
-    style G fill:#6f42c1docker-compose down
+    style G fill:#6f42c1
 
-    style J fill:#28a745
+    style J fill:#28a745</table>
 
-    style K fill:#d73a49## Tech Stack```
+    style K fill:#d73a49
 
-    style O fill:#d73a49
-
-```
-
-
-
----### BackendThe API will be available at `http://localhost:3000`
-
-
-
-## Project Structure![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat&logo=node.js&logoColor=white)
-
-
-
-```![Express](https://img.shields.io/badge/Express-4.18-000000?style=flat&logo=express&logoColor=white)### 4. Local Development (Without Docker)
-
-cicd-pipeline/
-
-├── .github/![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat&logo=javascript&logoColor=black)
-
-│   └── workflows/
-
-│       └── ci-cd-pipeline.yml    # 8-stage CI/CD pipeline```bash
-
-├── src/
-
-│   ├── config/### Database & Caching# Install dependencies
-
-│   │   ├── database.js           # PostgreSQL connection pool
-
-│   │   └── swagger.js            # API documentation setup![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat&logo=postgresql&logoColor=white)npm install
-
-│   ├── controllers/
-
-│   │   ├── auth.controller.js    # Authentication logic![Redis](https://img.shields.io/badge/Redis-7-DC382D?style=flat&logo=redis&logoColor=white)
-
-│   │   └── task.controller.js    # Task CRUD operations
-
-│   ├── middleware/# Set up database (PostgreSQL must be running)
-
-│   │   ├── auth.js               # JWT verification
-
-│   │   ├── errorHandler.js       # Global error handler### DevOps & Infrastructurenpm run migrate
-
-│   │   └── rateLimiter.js        # Rate limiting
-
-│   ├── routes/![Docker](https://img.shields.io/badge/Docker-24+-2496ED?style=flat&logo=docker&logoColor=white)
-
-│   │   ├── auth.routes.js        # Auth endpoints
-
-│   │   ├── task.routes.js        # Task endpoints![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-2088FF?style=flat&logo=github-actions&logoColor=white)# Seed database with sample data (optional)
-
-│   │   ├── health.routes.js      # Health checks
-
-│   │   └── image.routes.js       # Image integration (optional)![AWS](https://img.shields.io/badge/AWS-ECS/Fargate-FF9900?style=flat&logo=amazon-aws&logoColor=white)npm run seed
-
-│   ├── database/
-
-│   │   ├── migrate.js            # Database migrations![Nginx](https://img.shields.io/badge/Nginx-1.25-009639?style=flat&logo=nginx&logoColor=white)
-
-│   │   └── seed.js               # Seed data
-
-│   ├── utils/# Start development server
-
-│   │   └── logger.js             # Winston logger
-
-│   ├── tests/### Testing & Qualitynpm run dev
-
-│   │   ├── auth.test.js          # Auth tests
-
-│   │   ├── health.test.js        # Health check tests![Jest](https://img.shields.io/badge/Jest-29+-C21325?style=flat&logo=jest&logoColor=white)```
-
-│   │   └── setup.js              # Test setup
-
-│   └── server.js                 # Express app entry point![ESLint](https://img.shields.io/badge/ESLint-8+-4B32C3?style=flat&logo=eslint&logoColor=white)
-
-├── scripts/
-
-│   ├── init-db.sql               # Database initialization![k6](https://img.shields.io/badge/k6-Performance-7D64FF?style=flat&logo=k6&logoColor=white)## 📚 API Documentation
-
-│   └── performance-test.js       # k6 performance tests
-
-├── nginx/
-
-│   └── nginx.conf                # Nginx configuration
-
-├── Dockerfile                     # Multi-stage Docker build### Security ToolsOnce the application is running, visit:
-
-├── docker-compose.yml             # Local development setup
-
-├── package.json                   # Dependencies & scripts![Snyk](https://img.shields.io/badge/Snyk-Security-4C4A73?style=flat&logo=snyk&logoColor=white)
-
-├── jest.config.js                 # Test configuration
-
-├── .eslintrc.js                  # Linting rules![Trivy](https://img.shields.io/badge/Trivy-Container_Scan-1904DA?style=flat&logo=aqua&logoColor=white)- **Swagger UI**: `http://localhost:3000/api-docs`
-
-├── .env.example                  # Environment template
-
-└── README.md                      # This file- **OpenAPI JSON**: `http://localhost:3000/api-docs.json`
+    style O fill:#d73a49- **Security-first approach** with multiple scanning tools| **Testing** | Jest, Supertest |
 
 ```
 
 ---
 
+### Database Schema
+
+- **Production-ready** monitoring and logging| **Security** | Helmet, express-validator, Snyk, CodeQL |
+
+```mermaid
+
+erDiagram## Tech Stack
+
+    USERS ||--o{ TASKS : creates
+
+    USERS {- **Scalable architecture** with Docker and AWS ECS| **CI/CD** | GitHub Actions, Docker, AWS ECS |
+
+        uuid id PK
+
+        string username UK<div align="center">
+
+        string email UK
+
+        string password_hash| **Monitoring** | CloudWatch, Sentry, New Relic |
+
+        timestamp created_at
+
+        timestamp updated_at**Backend**
+
+    }
+
+    TASKS {---| **Documentation** | Swagger/OpenAPI |
+
+        uuid id PK
+
+        uuid user_id FK![Node.js](https://skillicons.dev/icons?i=nodejs) ![Express](https://skillicons.dev/icons?i=express) ![JavaScript](https://skillicons.dev/icons?i=js)
+
+        string title
+
+        text description| **Containerization** | Docker, Docker Compose |
+
+        string status
+
+        string priority**Database & Cache**
+
+        timestamp due_date
+
+        timestamp created_at## Features
+
+        timestamp updated_at
+
+    }![PostgreSQL](https://skillicons.dev/icons?i=postgres) ![Redis](https://skillicons.dev/icons?i=redis)
+
+```
+
+## 🛠️ Prerequisites
+
 ---
 
-### Quick API Reference
+**DevOps & Infrastructure**
 
-## Quick Start
+## 🛠️ Prerequisites
 
-## Architecture
+### Core Functionality
 
-### Prerequisites
+- **Node.js** >= 18.0.0
 
-| Method | Endpoint | Description | Auth |
+- **npm** >= 9.0.0![Docker](https://skillicons.dev/icons?i=docker) ![Nginx](https://skillicons.dev/icons?i=nginx) ![AWS](https://skillicons.dev/icons?i=aws) ![GitHub Actions](https://skillicons.dev/icons?i=github)
 
-- Node.js 18+
+- **Docker** >= 20.10 and Docker Compose >= 2.0
 
-- Docker Desktop (running)### System Architecture|--------|----------|-------------|------|
+- **Git** >= 2.30- User authentication with JWT tokens- **Node.js** >= 18.0.0
 
-- npm or yarn
+- **PostgreSQL** >= 15 (optional, for local development without Docker)
 
-| GET | `/api/health` | Health check | No |
+- **AWS Account** (optional, for production deployment)**Testing & Tools**
 
-### Installation
 
-```mermaid| POST | `/api/v1/auth/register` | Register user | No |
+
+---- Task management (CRUD operations)- **npm** >= 9.0.0
+
+
+
+## 🚦 Quick Start![Jest](https://skillicons.dev/icons?i=jest) ![Git](https://skillicons.dev/icons?i=git) ![VSCode](https://skillicons.dev/icons?i=vscode)
+
+
+
+### 1. Clone the Repository- Image upload integration (proxy to serverless API)- **Docker** >= 20.10 and Docker Compose >= 2.0
+
+
+
+```bash</div>
+
+git clone https://github.com/username/task-api.git
+
+cd task-api- Health check endpoints with dependency status- **PostgreSQL** >= 15 (for local development without Docker)
+
+```
+
+---
+
+### 2. Environment Configuration
+
+- Rate limiting and request throttling- **Git** >= 2.30
 
 ```bash
 
-# Clone the repositorygraph TB| POST | `/api/v1/auth/login` | Login user | No |
+# Copy environment template## Architecture
 
-git clone https://github.com/yourusername/cicd-pipeline.git
+cp .env.example .env
 
-cd cicd-pipeline    subgraph "Client Layer"| GET | `/api/v1/auth/me` | Get profile | Yes |
-
-
-
-# Install dependencies        Client[Web/Mobile Client]| GET | `/api/v1/tasks` | List tasks | Yes |
-
-npm install
-
-    end| POST | `/api/v1/tasks` | Create task | Yes |
-
-# Create environment file
-
-cp .env.example .env    | GET | `/api/v1/tasks/:id` | Get task | Yes |
+- API versioning
 
 # Edit .env with your configuration
 
-    subgraph "Load Balancer"| PUT | `/api/v1/tasks/:id` | Update task | Yes |
-
-# Start all services with Docker Compose
-
-docker-compose up -d        Nginx[Nginx Reverse Proxy<br/>Port 80]| DELETE | `/api/v1/tasks/:id` | Delete task | Yes |
+```### System Architecture
 
 
 
-# Wait 30 seconds for PostgreSQL to initialize    end
+**Required Environment Variables:**## 🚦 Quick Start
 
-sleep 30
 
-    ### Example Requests
+
+```env```mermaid
+
+NODE_ENV=development
+
+PORT=3000graph TB### DevOps Excellence
+
+DB_HOST=localhost
+
+DB_PORT=5432    subgraph "External Traffic"
+
+DB_NAME=taskdb
+
+DB_USER=taskuser        Client[Client/Browser]- Automated CI/CD with GitHub Actions### 1. Clone the Repository
+
+DB_PASSWORD=your_secure_password
+
+JWT_SECRET=your_jwt_secret_key    end
+
+REDIS_HOST=localhost
+
+REDIS_PORT=6379    - Multi-stage Docker builds (< 200MB images)
+
+```
+
+    subgraph "Docker Network"
+
+### 3. Using Docker Compose (Recommended)
+
+        Nginx[Nginx Reverse Proxy<br/>Port 80]- Database migrations and seeding```bash
+
+```bash
+
+# Start all services        API[Node.js API<br/>Express Server<br/>Port 3000]
+
+docker-compose up -d
+
+        DB[(PostgreSQL<br/>Database<br/>Port 5432)]- Blue-green deployment strategygit clone https://github.com/username/task-api.git
+
+# View logs
+
+docker-compose logs -f api        Cache[(Redis<br/>Cache<br/>Port 6379)]
+
+
+
+# Check status    end- Automated rollback on failurecd task-api
+
+docker ps
+
+```    
+
+
+
+**Wait for services to be ready (about 30 seconds), then:**    subgraph "Optional Integration"- Performance testing with k6```
+
+
+
+```bash        Serverless[Serverless API<br/>AWS Lambda]
 
 # Run database migrations
 
-docker exec task_api npm run migrate    subgraph "Application Layer"
+docker exec task_api npm run migrate    end
 
 
 
-# Seed initial data        API1[Node.js API Instance 1<br/>Port 3000]**Register a User:**
+# Seed database with sample data (optional)    
 
 docker exec task_api npm run seed
 
-```        API2[Node.js API Instance 2<br/>Port 3000]```bash
+```    Client -->|HTTP| Nginx### Security### 2. Environment Configuration
 
 
 
-### Verify Installation        API3[Node.js API Instance 3<br/>Port 3000]curl -X POST http://localhost:3000/api/v1/auth/register \
+The API will be available at `http://localhost:3000`    Nginx -->|Proxy| API
 
 
 
-```bash    end  -H "Content-Type: application/json" \
-
-# Check if containers are running
-
-docker ps      -d '{
+### 4. Local Development (Without Docker)    API -->|SQL Queries| DB- JWT-based authentication
 
 
 
-# Test health endpoint    subgraph "Data Layer"    "email": "user@example.com",
+```bash    API -->|Cache Operations| Cache
 
-curl http://localhost/api/health
+# Install dependencies
 
-```        PG[(PostgreSQL 15<br/>Primary Database)]    "password": "Password123",
+npm install    API -.->|Image Processing| Serverless- Password hashing with bcrypt```bash
 
 
 
-**Expected Output:**        Redis[(Redis 7<br/>Cache & Sessions)]    "name": "John Doe"
+# Set up database (PostgreSQL must be running)    
+
+npm run migrate
+
+    style Nginx fill:#269B24- Helmet.js security headerscp .env.example .env
+
+# Seed database with sample data (optional)
+
+npm run seed    style API fill:#68A063
+
+
+
+# Start development server    style DB fill:#336791- Rate limiting per IP# Edit .env with your configuration
+
+npm run dev
+
+```    style Cache fill:#DC382D
+
+
+
+### 5. Verify Installation    style Serverless fill:#FF9900- Input validation and sanitization```
+
+
+
+```bash```
+
+# Health check
+
+curl http://localhost:3000/api/health- Security vulnerability scanning
+
+```
+
+### CI/CD Pipeline Architecture
+
+**Expected Response:**
+
+- Container security scanning### 3. Using Docker Compose (Recommended)
 
 ```json
 
-{    end  }'
+{```mermaid
 
   "status": "ok",
 
-  "timestamp": "2025-10-13T12:00:00.000Z",    ```
+  "timestamp": "2025-10-13T12:00:00.000Z",graph LR
 
   "services": {
 
-    "database": "connected",    subgraph "External Services"
+    "database": "connected",    A[Code Push] --> B[Linting<br/>ESLint]
 
     "redis": "connected"
 
-  },        S3[AWS S3<br/>Image Storage]**Create a Task:**
+  },    B --> C[Security Scan<br/>npm audit<br/>Snyk<br/>CodeQL]### Observability```bash
 
   "version": "1.0.0"
 
-}        Lambda[AWS Lambda<br/>Image Processing]```bash
+}    C --> D[Unit Tests<br/>Jest]
 
 ```
 
-    endcurl -X POST http://localhost:3000/api/v1/tasks \
+    D --> E[Build Docker<br/>Multi-stage]- Structured logging with Winston# Start all services
 
 ---
 
-      -H "Content-Type: application/json" \
+    E --> F[Integration Tests<br/>Supertest]
 
-## API Documentation
+## 📚 API Documentation
 
-    Client --> Nginx  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+    F --> G[Performance Tests<br/>k6]- Health check endpointsdocker-compose up -d
 
-### Base URL
+### Access Interactive Documentation
 
-    Nginx --> API1  -d '{
+    G --> H[Deploy Staging<br/>AWS ECS]
 
-```
+Once the application is running, visit:
 
-http://localhost/api/v1    Nginx --> API2    "title": "Complete project",
+    H --> I{Health Check<br/>Pass?}- Database connection monitoring
 
-```
+- **Swagger UI**: `http://localhost:3000/api-docs`
 
-    Nginx --> API3    "description": "Finish the API development",
-
-### Authentication Endpoints
-
-        "priority": "high",
-
-#### Register User
-
-    API1 --> PG    "status": "in_progress"
-
-```bash
-
-curl -X POST http://localhost/api/v1/auth/register \    API2 --> PG  }'
-
-  -H "Content-Type: application/json" \
-
-  -d '{    API3 --> PG```
-
-    "username": "johndoe",
-
-    "email": "john@example.com",    
-
-    "password": "SecurePass123!"
-
-  }'    API1 --> Redis## 🔄 CI/CD Pipeline
-
-```
-
-    API2 --> Redis
-
-**Response:**
-
-```json    API3 --> Redis### Pipeline Stages
-
-{
-
-  "success": true,    
-
-  "data": {
-
-    "id": 1,    API1 -.Image Upload.-> Lambda```mermaid
-
-    "username": "johndoe",
-
-    "email": "john@example.com"    API2 -.Image Upload.-> Lambdagraph LR
-
-  },
-
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."    API3 -.Image Upload.-> Lambda    A[Code Quality] --> B[Security Scan]
-
-}
-
-```        B --> C[Unit Tests]
+- **OpenAPI JSON**: `http://localhost:3000/api-docs.json`    I -->|Yes| J[Deploy Production<br/>Blue-Green]
 
 
 
-#### Login    Lambda --> S3    C --> D[Integration Tests]
+### Quick API Reference    I -->|No| K[Rollback]- Redis connection monitoring# View logs
 
 
 
-```bash        D --> E[Build Docker]
+| Method | Endpoint | Description | Auth |    J --> L[Smoke Tests]
 
-curl -X POST http://localhost/api/v1/auth/login \
+|--------|----------|-------------|------|
 
-  -H "Content-Type: application/json" \    style Client fill:#e1f5ff    E --> F[Performance Tests]
+| GET | `/api/health` | Health check | No |    L --> M{Success?}- Swagger/OpenAPI documentationdocker-compose logs -f api
+
+| POST | `/api/v1/auth/register` | Register user | No |
+
+| POST | `/api/v1/auth/login` | Login user | No |    M -->|Yes| N[Complete]
+
+| GET | `/api/v1/auth/me` | Get profile | Yes |
+
+| GET | `/api/v1/tasks` | List tasks | Yes |    M -->|No| O[Auto Rollback]
+
+| POST | `/api/v1/tasks` | Create task | Yes |
+
+| GET | `/api/v1/tasks/:id` | Get task | Yes |    
+
+| PUT | `/api/v1/tasks/:id` | Update task | Yes |
+
+| DELETE | `/api/v1/tasks/:id` | Delete task | Yes |    style A fill:#4078c0---# Stop services
+
+
+
+### Example Requests    style C fill:#d73a49
+
+
+
+**Register a User:**    style G fill:#6f42c1docker-compose down
+
+
+
+```bash    style J fill:#28a745
+
+curl -X POST http://localhost:3000/api/v1/auth/register \
+
+  -H "Content-Type: application/json" \    style K fill:#d73a49## Tech Stack```
 
   -d '{
 
-    "email": "john@example.com",    style Nginx fill:#90ee90    F --> G[Deploy Staging]
+    "email": "user@example.com",    style O fill:#d73a49
 
-    "password": "SecurePass123!"
+    "password": "Password123!",
 
-  }'    style API1 fill:#ffd700    G --> H[Deploy Production]
-
-```
-
-    style API2 fill:#ffd700```
-
-**Response:**
-
-```json    style API3 fill:#ffd700
-
-{
-
-  "success": true,    style PG fill:#4169e1### Pipeline Features
-
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-
-  "user": {    style Redis fill:#dc382d
-
-    "id": 1,
-
-    "username": "johndoe",    style S3 fill:#ff99001. **Code Quality & Linting**
-
-    "email": "john@example.com"
-
-  }    style Lambda fill:#ff9900   - ESLint checks
-
-}
-
-``````   - Prettier formatting
-
-
-
-### Task Endpoints   - Code standards enforcement
-
-
-
-#### Create Task### CI/CD Pipeline Flow
-
-
-
-```bash2. **Security Scanning**
-
-curl -X POST http://localhost/api/v1/tasks \
-
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \```mermaid   - npm audit for vulnerabilities
-
-  -H "Content-Type: application/json" \
-
-  -d '{graph LR   - Snyk security analysis
-
-    "title": "Complete project documentation",
-
-    "description": "Write comprehensive README",    A[Git Push] --> B[Code Quality]   - CodeQL static analysis
-
-    "status": "pending",
-
-    "priority": "high"    B --> C[Security Scan]   - Secret scanning with TruffleHog
+    "name": "John Doe"```
 
   }'
 
-```    C --> D[Unit Tests]
-
-
-
-**Response:**    D --> E[Build Docker]3. **Automated Testing**
-
-```json
-
-{    E --> F[Integration Tests]   - Unit tests with Jest
-
-  "success": true,
-
-  "data": {    F --> G[Performance Tests]   - Integration tests with Supertest
-
-    "id": 1,
-
-    "title": "Complete project documentation",    G --> H{All Pass?}   - 70%+ code coverage requirement
-
-    "description": "Write comprehensive README",
-
-    "status": "pending",    H -->|Yes| I[Deploy Staging]   - Multi-version Node.js testing (18.x, 20.x)
-
-    "priority": "high",
-
-    "userId": 1,    H -->|No| J[Notify Failure]
-
-    "createdAt": "2025-10-13T12:00:00.000Z",
-
-    "updatedAt": "2025-10-13T12:00:00.000Z"    I --> K[Smoke Tests]4. **Docker Build & Scan**
-
-  }
-
-}    K --> L{Tests Pass?}   - Multi-stage Docker builds
-
 ```
 
-    L -->|Yes| M[Deploy Production]   - Image optimization (< 200MB)
 
-#### Get All Tasks
 
-    L -->|No| N[Rollback]   - Trivy vulnerability scanning
+**Login:**---### BackendThe API will be available at `http://localhost:3000`
+
+
 
 ```bash
 
+curl -X POST http://localhost:3000/api/v1/auth/login \
+
+  -H "Content-Type: application/json" \## Project Structure![Node.js](https://img.shields.io/badge/Node.js-18+-339933?style=flat&logo=node.js&logoColor=white)
+
+  -d '{
+
+    "email": "user@example.com",
+
+    "password": "Password123!"
+
+  }'```![Express](https://img.shields.io/badge/Express-4.18-000000?style=flat&logo=express&logoColor=white)### 4. Local Development (Without Docker)
+
+```
+
+cicd-pipeline/
+
+**Create a Task:**
+
+├── .github/![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=flat&logo=javascript&logoColor=black)
+
+```bash
+
+curl -X POST http://localhost:3000/api/v1/tasks \│   └── workflows/
+
+  -H "Content-Type: application/json" \
+
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \│       └── ci-cd-pipeline.yml    # 8-stage CI/CD pipeline```bash
+
+  -d '{
+
+    "title": "Complete project",├── src/
+
+    "description": "Finish the API development",
+
+    "priority": "high",│   ├── config/### Database & Caching# Install dependencies
+
+    "status": "in_progress"
+
+  }'│   │   ├── database.js           # PostgreSQL connection pool
+
+```
+
+│   │   └── swagger.js            # API documentation setup![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat&logo=postgresql&logoColor=white)npm install
+
+---
+
+│   ├── controllers/
+
+## 🧪 Testing
+
+│   │   ├── auth.controller.js    # Authentication logic![Redis](https://img.shields.io/badge/Redis-7-DC382D?style=flat&logo=redis&logoColor=white)
+
+### Run All Tests
+
+│   │   └── task.controller.js    # Task CRUD operations
+
+```bash
+
+npm test│   ├── middleware/# Set up database (PostgreSQL must be running)
+
+```
+
+│   │   ├── auth.js               # JWT verification
+
+### Run Tests with Coverage
+
+│   │   ├── errorHandler.js       # Global error handler### DevOps & Infrastructurenpm run migrate
+
+```bash
+
+npm run test:coverage│   │   └── rateLimiter.js        # Rate limiting
+
+```
+
+│   ├── routes/![Docker](https://img.shields.io/badge/Docker-24+-2496ED?style=flat&logo=docker&logoColor=white)
+
+### Run Integration Tests Only
+
+│   │   ├── auth.routes.js        # Auth endpoints
+
+```bash
+
+npm run test:integration│   │   ├── task.routes.js        # Task endpoints![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-2088FF?style=flat&logo=github-actions&logoColor=white)# Seed database with sample data (optional)
+
+```
+
+│   │   ├── health.routes.js      # Health checks
+
+### Run Tests in Watch Mode
+
+│   │   └── image.routes.js       # Image integration (optional)![AWS](https://img.shields.io/badge/AWS-ECS/Fargate-FF9900?style=flat&logo=amazon-aws&logoColor=white)npm run seed
+
+```bash
+
+npm run test:watch│   ├── database/
+
+```
+
+│   │   ├── migrate.js            # Database migrations![Nginx](https://img.shields.io/badge/Nginx-1.25-009639?style=flat&logo=nginx&logoColor=white)
+
+### Performance Testing
+
+│   │   └── seed.js               # Seed data
+
+```bash
+
+npm run test:performance│   ├── utils/# Start development server
+
+```
+
+│   │   └── logger.js             # Winston logger
+
+**Sample Performance Test Output:**
+
+│   ├── tests/### Testing & Qualitynpm run dev
+
+```
+
+✓ http_req_duration..............: avg=45.2ms  min=12.3ms  med=38.7ms  max=234.5ms│   │   ├── auth.test.js          # Auth tests
+
+✓ http_req_failed................: 0.00%  ✓ 0     ✗ 5000
+
+✓ http_reqs......................: 5000   166.67/s│   │   ├── health.test.js        # Health check tests![Jest](https://img.shields.io/badge/Jest-29+-C21325?style=flat&logo=jest&logoColor=white)```
+
+
+
+checks........................: 100.00% ✓ 15000    ✗ 0│   │   └── setup.js              # Test setup
+
+```
+
+│   └── server.js                 # Express app entry point![ESLint](https://img.shields.io/badge/ESLint-8+-4B32C3?style=flat&logo=eslint&logoColor=white)
+
+### Test Coverage Report
+
+├── scripts/
+
+After running tests with coverage, open `coverage/lcov-report/index.html` in your browser.
+
+│   ├── init-db.sql               # Database initialization![k6](https://img.shields.io/badge/k6-Performance-7D64FF?style=flat&logo=k6&logoColor=white)## 📚 API Documentation
+
+**Current Coverage:** 74%+ across all categories
+
+│   └── performance-test.js       # k6 performance tests
+
+---
+
+├── nginx/
+
+## 🔄 CI/CD Pipeline
+
+│   └── nginx.conf                # Nginx configuration
+
+### Pipeline Stages
+
+├── Dockerfile                     # Multi-stage Docker build### Security ToolsOnce the application is running, visit:
+
+```mermaid
+
+graph TD├── docker-compose.yml             # Local development setup
+
+    A[Push to GitHub] --> B[Stage 1: Code Quality]
+
+    B --> C[Stage 2: Security Scanning]├── package.json                   # Dependencies & scripts![Snyk](https://img.shields.io/badge/Snyk-Security-4C4A73?style=flat&logo=snyk&logoColor=white)
+
+    C --> D[Stage 3: Unit Testing]
+
+    D --> E[Stage 4: Build Docker Image]├── jest.config.js                 # Test configuration
+
+    E --> F[Stage 5: Integration Testing]
+
+    F --> G[Stage 6: Performance Testing]├── .eslintrc.js                  # Linting rules![Trivy](https://img.shields.io/badge/Trivy-Container_Scan-1904DA?style=flat&logo=aqua&logoColor=white)- **Swagger UI**: `http://localhost:3000/api-docs`
+
+    G --> H[Stage 7: Deploy to Staging]
+
+    H --> I{Health Check}├── .env.example                  # Environment template
+
+    I -->|Pass| J[Stage 8: Deploy to Production]
+
+    I -->|Fail| K[Rollback & Alert]└── README.md                      # This file- **OpenAPI JSON**: `http://localhost:3000/api-docs.json`
+
+    J --> L{Smoke Tests}
+
+    L -->|Pass| M[Complete ✓]```
+
+    L -->|Fail| N[Auto Rollback]
+
+    ---
+
+    style A fill:#4078c0
+
+    style B fill:#6f42c1---
+
+    style C fill:#d73a49
+
+    style D fill:#28a745### Quick API Reference
+
+    style E fill:#0366d6
+
+    style J fill:#28a745## Quick Start
+
+    style K fill:#d73a49
+
+    style N fill:#d73a49## Architecture
+
+```
+
+### Prerequisites
+
+### Stage Details
+
+| Method | Endpoint | Description | Auth |
+
+| Stage | Tools | Duration | Purpose |
+
+|-------|-------|----------|---------|- Node.js 18+
+
+| **1. Code Quality** | ESLint, Prettier | ~1 min | Enforce coding standards |
+
+| **2. Security Scan** | npm audit, Snyk, CodeQL | ~2 min | Detect vulnerabilities |- Docker Desktop (running)### System Architecture|--------|----------|-------------|------|
+
+| **3. Unit Tests** | Jest, Supertest | ~2 min | Verify code functionality |
+
+| **4. Build** | Docker | ~3 min | Create optimized image |- npm or yarn
+
+| **5. Integration** | Jest + Docker | ~2 min | Test API endpoints |
+
+| **6. Performance** | k6 | ~2 min | Load testing || GET | `/api/health` | Health check | No |
+
+| **7. Staging** | AWS ECS | ~4 min | Deploy to test environment |
+
+| **8. Production** | AWS ECS | ~5 min | Blue-green deployment |### Installation
+
+
+
+### GitHub Secrets Required```mermaid| POST | `/api/v1/auth/register` | Register user | No |
+
+
+
+Configure these secrets in your GitHub repository:```bash
+
+
+
+```# Clone the repositorygraph TB| POST | `/api/v1/auth/login` | Login user | No |
+
+AWS_ACCESS_KEY_ID           # AWS credentials for deployment
+
+AWS_SECRET_ACCESS_KEY       # AWS secret keygit clone https://github.com/yourusername/cicd-pipeline.git
+
+CODECOV_TOKEN               # Codecov integration
+
+SNYK_TOKEN                  # Snyk security scanningcd cicd-pipeline    subgraph "Client Layer"| GET | `/api/v1/auth/me` | Get profile | Yes |
+
+SLACK_WEBHOOK_URL           # Slack notifications (optional)
+
+DOCKER_HUB_USERNAME         # Docker Hub credentials (optional)
+
+DOCKER_HUB_TOKEN            # Docker Hub token (optional)
+
+```# Install dependencies        Client[Web/Mobile Client]| GET | `/api/v1/tasks` | List tasks | Yes |
+
+
+
+---npm install
+
+
+
+## 🚀 Deployment    end| POST | `/api/v1/tasks` | Create task | Yes |
+
+
+
+### Local Development# Create environment file
+
+
+
+```bashcp .env.example .env    | GET | `/api/v1/tasks/:id` | Get task | Yes |
+
+# Start all services
+
+docker-compose up -d# Edit .env with your configuration
+
+
+
+# Stop services    subgraph "Load Balancer"| PUT | `/api/v1/tasks/:id` | Update task | Yes |
+
+docker-compose down
+
+# Start all services with Docker Compose
+
+# Restart specific service
+
+docker-compose restart apidocker-compose up -d        Nginx[Nginx Reverse Proxy<br/>Port 80]| DELETE | `/api/v1/tasks/:id` | Delete task | Yes |
+
+```
+
+
+
+### Deploy to AWS ECS/Fargate
+
+# Wait 30 seconds for PostgreSQL to initialize    end
+
+#### Prerequisites
+
+sleep 30
+
+- AWS account with ECS configured
+
+- ECR repository created    ### Example Requests
+
+- ECS cluster running
+
+# Run database migrations
+
+#### Manual Deployment
+
+docker exec task_api npm run migrate    subgraph "Application Layer"
+
+```bash
+
+# Build and tag image
+
+docker build -t task-api:latest .
+
+# Seed initial data        API1[Node.js API Instance 1<br/>Port 3000]**Register a User:**
+
+# Tag for ECR
+
+docker tag task-api:latest <account-id>.dkr.ecr.us-east-1.amazonaws.com/task-api:latestdocker exec task_api npm run seed
+
+
+
+# Push to ECR```        API2[Node.js API Instance 2<br/>Port 3000]```bash
+
+docker push <account-id>.dkr.ecr.us-east-1.amazonaws.com/task-api:latest
+
+
+
+# Update ECS service
+
+aws ecs update-service \### Verify Installation        API3[Node.js API Instance 3<br/>Port 3000]curl -X POST http://localhost:3000/api/v1/auth/register \
+
+  --cluster production-cluster \
+
+  --service task-api \
+
+  --force-new-deployment
+
+``````bash    end  -H "Content-Type: application/json" \
+
+
+
+#### Automated Deployment# Check if containers are running
+
+
+
+The CI/CD pipeline automatically deploys:docker ps      -d '{
+
+
+
+- **Staging**: On every push to `main` branch
+
+- **Production**: On manual approval or tagged releases
+
+# Test health endpoint    subgraph "Data Layer"    "email": "user@example.com",
+
+### Environment Configuration
+
+curl http://localhost/api/health
+
+**Staging:**
+
+- URL: `https://staging.taskapi.com````        PG[(PostgreSQL 15<br/>Primary Database)]    "password": "Password123",
+
+- Database: RDS staging instance
+
+- Auto-deploy enabled
+
+
+
+**Production:****Expected Output:**        Redis[(Redis 7<br/>Cache & Sessions)]    "name": "John Doe"
+
+- URL: `https://api.taskapi.com`
+
+- Database: RDS production instance```json
+
+- Manual approval required
+
+- Blue-green deployment{    end  }'
+
+
+
+---  "status": "ok",
+
+
+
+## 🔒 Security  "timestamp": "2025-10-13T12:00:00.000Z",    ```
+
+
+
+### Implemented Security Measures  "services": {
+
+
+
+- ✅ Helmet.js for HTTP headers    "database": "connected",    subgraph "External Services"
+
+- ✅ CORS configuration
+
+- ✅ Rate limiting (100 requests per 15 minutes)    "redis": "connected"
+
+- ✅ JWT authentication
+
+- ✅ Password hashing with bcrypt (12 rounds)  },        S3[AWS S3<br/>Image Storage]**Create a Task:**
+
+- ✅ Input validation and sanitization
+
+- ✅ SQL injection protection (parameterized queries)  "version": "1.0.0"
+
+- ✅ Environment variable secrets
+
+- ✅ Non-root Docker user}        Lambda[AWS Lambda<br/>Image Processing]```bash
+
+- ✅ Security scanning in CI/CD
+
+- ✅ Dependency vulnerability checks```
+
+
+
+### Rate Limiting    endcurl -X POST http://localhost:3000/api/v1/tasks \
+
+
+
+- **General API**: 100 requests per 15 minutes---
+
+- **Authentication endpoints**: 5 requests per 15 minutes
+
+- Configurable via environment variables      -H "Content-Type: application/json" \
+
+
+
+---## API Documentation
+
+
+
+## 📈 Monitoring & Observability    Client --> Nginx  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+
+
+
+### Health Endpoints### Base URL
+
+
+
+- `GET /api/health` - Application health status    Nginx --> API1  -d '{
+
+- `GET /api/metrics` - Application metrics (optional)
+
+- `GET /api/ready` - Readiness probe```
+
+
+
+### Logginghttp://localhost/api/v1    Nginx --> API2    "title": "Complete project",
+
+
+
+Structured JSON logging with Winston:```
+
+
+
+- **Info level**: General application events    Nginx --> API3    "description": "Finish the API development",
+
+- **Error level**: Errors and exceptions
+
+- **Debug level**: Detailed debugging (development only)### Authentication Endpoints
+
+
+
+Logs are stored in:        "priority": "high",
+
+- `logs/error.log` - Error logs
+
+- `logs/combined.log` - All logs#### Register User
+
+
+
+### Monitoring Integration    API1 --> PG    "status": "in_progress"
+
+
+
+Configure these optional services:```bash
+
+
+
+- **CloudWatch** - AWS metrics and logscurl -X POST http://localhost/api/v1/auth/register \    API2 --> PG  }'
+
+- **Sentry** - Error tracking (optional)
+
+- **New Relic** - Application performance monitoring (optional)  -H "Content-Type: application/json" \
+
+
+
+---  -d '{    API3 --> PG```
+
+
+
+## 📁 Project Structure    "username": "johndoe",
+
+
+
+```    "email": "john@example.com",    
+
+cicd-pipeline/
+
+├── .github/    "password": "SecurePass123!"
+
+│   └── workflows/
+
+│       └── ci-cd-pipeline.yml        # Complete CI/CD workflow  }'    API1 --> Redis## 🔄 CI/CD Pipeline
+
+├── src/
+
+│   ├── config/```
+
+│   │   ├── database.js               # PostgreSQL connection pool
+
+│   │   └── swagger.js                # API documentation setup    API2 --> Redis
+
+│   ├── controllers/
+
+│   │   ├── auth.controller.js        # Authentication logic**Response:**
+
+│   │   └── task.controller.js        # Task CRUD operations
+
+│   ├── database/```json    API3 --> Redis### Pipeline Stages
+
+│   │   ├── migrate.js                # Database migrations
+
+│   │   └── seed.js                   # Sample data seeding{
+
+│   ├── middleware/
+
+│   │   ├── auth.js                   # JWT verification  "success": true,    
+
+│   │   ├── errorHandler.js           # Global error handling
+
+│   │   └── rateLimiter.js            # Rate limiting  "data": {
+
+│   ├── routes/
+
+│   │   ├── auth.routes.js            # Auth endpoints    "id": 1,    API1 -.Image Upload.-> Lambda```mermaid
+
+│   │   ├── task.routes.js            # Task endpoints
+
+│   │   ├── image.routes.js           # Image proxy endpoints    "username": "johndoe",
+
+│   │   └── health.routes.js          # Health checks
+
+│   ├── tests/    "email": "john@example.com"    API2 -.Image Upload.-> Lambdagraph LR
+
+│   │   ├── auth.test.js              # Authentication tests
+
+│   │   ├── health.test.js            # Health check tests  },
+
+│   │   └── setup.js                  # Test configuration
+
+│   ├── utils/  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."    API3 -.Image Upload.-> Lambda    A[Code Quality] --> B[Security Scan]
+
+│   │   └── logger.js                 # Winston logger
+
+│   └── server.js                     # Express app entry point}
+
+├── scripts/
+
+│   ├── init-db.sql                   # Database initialization```        B --> C[Unit Tests]
+
+│   ├── performance-test.js           # k6 performance tests
+
+│   └── backup-db.js                  # Database backup utility
+
+├── nginx/
+
+│   └── nginx.conf                    # Reverse proxy config#### Login    Lambda --> S3    C --> D[Integration Tests]
+
+├── Dockerfile                        # Multi-stage Docker build
+
+├── docker-compose.yml                # Local development setup
+
+├── package.json                      # Dependencies & scripts
+
+├── jest.config.js                    # Jest configuration```bash        D --> E[Build Docker]
+
+├── .eslintrc.js                      # ESLint rules
+
+├── .prettierrc                       # Code formattingcurl -X POST http://localhost/api/v1/auth/login \
+
+├── .env.example                      # Environment template
+
+├── .gitignore                        # Git ignore rules  -H "Content-Type: application/json" \    style Client fill:#e1f5ff    E --> F[Performance Tests]
+
+└── README.md                         # This file
+
+```  -d '{
+
+
+
+---    "email": "john@example.com",    style Nginx fill:#90ee90    F --> G[Deploy Staging]
+
+
+
+## 🔧 Available Scripts    "password": "SecurePass123!"
+
+
+
+| Script | Description |  }'    style API1 fill:#ffd700    G --> H[Deploy Production]
+
+|--------|-------------|
+
+| `npm start` | Start production server |```
+
+| `npm run dev` | Start development server with hot reload |
+
+| `npm test` | Run all tests |    style API2 fill:#ffd700```
+
+| `npm run test:watch` | Run tests in watch mode |
+
+| `npm run test:integration` | Run integration tests only |**Response:**
+
+| `npm run test:coverage` | Run tests with coverage report |
+
+| `npm run test:performance` | Run k6 performance tests |```json    style API3 fill:#ffd700
+
+| `npm run lint` | Run ESLint |
+
+| `npm run lint:fix` | Fix ESLint errors |{
+
+| `npm run format` | Format code with Prettier |
+
+| `npm run format:check` | Check code formatting |  "success": true,    style PG fill:#4169e1### Pipeline Features
+
+| `npm run migrate` | Run database migrations |
+
+| `npm run migrate:rollback` | Rollback database migrations |  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+
+| `npm run seed` | Seed database with sample data |
+
+| `npm run db:backup` | Backup database |  "user": {    style Redis fill:#dc382d
+
+
+
+---    "id": 1,
+
+
+
+## 🐛 Troubleshooting    "username": "johndoe",    style S3 fill:#ff99001. **Code Quality & Linting**
+
+
+
+### Docker Issues    "email": "john@example.com"
+
+
+
+**Port 80 already in use:**  }    style Lambda fill:#ff9900   - ESLint checks
+
+
+
+```bash}
+
+# Windows
+
+netstat -ano | findstr :80``````   - Prettier formatting
+
+taskkill /PID <pid> /F
+
+
+
+# Linux/Mac
+
+lsof -i :80### Task Endpoints   - Code standards enforcement
+
+kill -9 <pid>
+
+```
+
+
+
+**Database connection failed:**#### Create Task### CI/CD Pipeline Flow
+
+
+
+```bash
+
+# Check database logs
+
+docker logs task_db```bash2. **Security Scanning**
+
+
+
+# Check database readinesscurl -X POST http://localhost/api/v1/tasks \
+
+docker exec task_db pg_isready -U taskuser
+
+  -H "Authorization: Bearer YOUR_JWT_TOKEN" \```mermaid   - npm audit for vulnerabilities
+
+# Restart PostgreSQL
+
+docker-compose restart postgres  -H "Content-Type: application/json" \
+
+```
+
+  -d '{graph LR   - Snyk security analysis
+
+**Containers not starting:**
+
+    "title": "Complete project documentation",
+
+```bash
+
+# Check Docker daemon    "description": "Write comprehensive README",    A[Git Push] --> B[Code Quality]   - CodeQL static analysis
+
+docker --version
+
+docker ps    "status": "pending",
+
+
+
+# View all containers (including stopped)    "priority": "high"    B --> C[Security Scan]   - Secret scanning with TruffleHog
+
+docker ps -a
+
+  }'
+
+# Restart all services
+
+docker-compose down```    C --> D[Unit Tests]
+
+docker-compose up -d
+
+```
+
+
+
+### Application Issues**Response:**    D --> E[Build Docker]3. **Automated Testing**
+
+
+
+**Migration errors:**```json
+
+
+
+```bash{    E --> F[Integration Tests]   - Unit tests with Jest
+
+# Reset migrations
+
+docker exec task_api npm run migrate:rollback  "success": true,
+
+docker exec task_api npm run migrate
+
+```  "data": {    F --> G[Performance Tests]   - Integration tests with Supertest
+
+
+
+**Tests failing:**    "id": 1,
+
+
+
+```bash    "title": "Complete project documentation",    G --> H{All Pass?}   - 70%+ code coverage requirement
+
+# Clear Jest cache
+
+npm test -- --clearCache    "description": "Write comprehensive README",
+
+
+
+# Run tests in verbose mode    "status": "pending",    H -->|Yes| I[Deploy Staging]   - Multi-version Node.js testing (18.x, 20.x)
+
+npm test -- --verbose
+
+```    "priority": "high",
+
+
+
+---    "userId": 1,    H -->|No| J[Notify Failure]
+
+
+
+## 📊 Key Metrics    "createdAt": "2025-10-13T12:00:00.000Z",
+
+
+
+- **API Response Time:** < 100ms (p95)    "updatedAt": "2025-10-13T12:00:00.000Z"    I --> K[Smoke Tests]4. **Docker Build & Scan**
+
+- **Test Coverage:** 74%+
+
+- **Docker Image Size:** < 200MB  }
+
+- **Build Time:** ~3 minutes
+
+- **Deployment Time:** ~5 minutes}    K --> L{Tests Pass?}   - Multi-stage Docker builds
+
+- **Zero Downtime:** Blue-green deployment
+
+```
+
+---
+
+    L -->|Yes| M[Deploy Production]   - Image optimization (< 200MB)
+
+## 🤝 Contributing
+
+#### Get All Tasks
+
+1. Fork the repository
+
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)    L -->|No| N[Rollback]   - Trivy vulnerability scanning
+
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+
+4. Push to the branch (`git push origin feature/AmazingFeature`)```bash
+
+5. Open a Pull Request
+
 curl -X GET http://localhost/api/v1/tasks \    M --> O[Health Check]   - Push to GitHub Container Registry
+
+---
 
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 
+## 📝 License
+
 ```    O --> P{Healthy?}
 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
+
+
+---
 
 **Response:**    P -->|Yes| Q[Success]5. **Performance Testing**
 
+## 👤 Author
+
 ```json
+
+**DevOps Portfolio Project**
 
 {    P -->|No| R[Auto Rollback]   - k6 load testing
 
-  "success": true,
+- GitHub: [@username](https://github.com/username)
 
-  "data": [       - Response time benchmarks
+- LinkedIn: [Your Name](https://linkedin.com/in/username)  "success": true,
 
-    {
 
-      "id": 1,    style A fill:#90ee90   - Throughput analysis
 
-      "title": "Complete project documentation",
+---  "data": [       - Response time benchmarks
+
+
+
+## 🙏 Acknowledgments    {
+
+
+
+- Express.js team for the excellent framework      "id": 1,    style A fill:#90ee90   - Throughput analysis
+
+- GitHub Actions for CI/CD platform
+
+- AWS for cloud infrastructure      "title": "Complete project documentation",
+
+- The open-source community
 
       "description": "Write comprehensive README",    style H fill:#ffd700
 
+---
+
       "status": "pending",
+
+## 📅 Roadmap
 
       "priority": "high",    style L fill:#ffd7006. **Deployment (Staging)**
 
-      "createdAt": "2025-10-13T12:00:00.000Z"
+- [ ] GraphQL API support
 
-    }    style P fill:#ffd700   - Automatic deployment on `main` branch
+- [ ] WebSocket real-time updates      "createdAt": "2025-10-13T12:00:00.000Z"
 
-  ],
+- [ ] Multi-region deployment
 
-  "pagination": {    style Q fill:#00ff00   - AWS ECS Fargate deployment
+- [ ] Kubernetes manifests    }    style P fill:#ffd700   - Automatic deployment on `main` branch
 
-    "page": 1,
+- [ ] Terraform infrastructure
 
-    "limit": 10,    style J fill:#ff0000   - Health check verification
+- [ ] Mobile app integration  ],
 
-    "total": 1
 
-  }    style N fill:#ff0000   - Automatic rollback on failure
 
-}
+---  "pagination": {    style Q fill:#00ff00   - AWS ECS Fargate deployment
+
+
+
+<div align="center">    "page": 1,
+
+
+
+**Built with ❤️ as a DevOps Portfolio Project**    "limit": 10,    style J fill:#ff0000   - Health check verification
+
+
+
+![Built with](https://skillicons.dev/icons?i=nodejs,express,postgres,redis,docker,github,aws)    "total": 1
+
+
+
+**⭐ Star this repository if you find it helpful!**  }    style N fill:#ff0000   - Automatic rollback on failure
+
+
+
+</div>}
+
 
 ```    style R fill:#ff0000
 
