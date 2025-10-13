@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![CI/CD Pipeline Architecture](./architecture-diagram.svg)
+<img src="./architecture-diagram.svg" alt="CI/CD Pipeline Architecture" width="100%">
 
 ![Tech Stack](https://skillicons.dev/icons?i=nodejs,express,postgres,redis,docker,nginx,aws,github)
 
