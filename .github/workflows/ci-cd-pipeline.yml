@@ -1,0 +1,499 @@
+name: Advanced CI/CD Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '18.x'
+  DOCKER_IMAGE_NAME: taskapi
+  REGISTRY: ghcr.io
+
+jobs:
+  # Job 1: Code Quality & Linting
+  code-quality:
+    name: Code Quality & Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+        continue-on-error: false
+
+      - name: Run Prettier check
+        run: npm run format:check
+        continue-on-error: false
+
+      - name: Upload ESLint results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eslint-results
+          path: eslint-report.json
+          if-no-files-found: ignore
+
+  # Job 2: Security Scanning
+  security-scan:
+    name: Security Scanning
+    runs-on: ubuntu-latest
+    needs: code-quality
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run npm audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      - name: Run Snyk Security Scan
+        uses: snyk/actions/node@master
+        continue-on-error: true
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+      - name: Secret Scanning
+        uses: trufflesecurity/trufflehog@main
+        continue-on-error: true
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+
+  # Job 3: Unit Tests
+  unit-tests:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    needs: code-quality
+    strategy:
+      matrix:
+        node-version: ['18.x', '20.x']
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test -- --ci --coverage --maxWorkers=2
+        env:
+          NODE_ENV: test
+          JWT_SECRET: test_jwt_secret
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: testdb
+          DB_USER: testuser
+          DB_PASSWORD: testpass
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/coverage-final.json
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.node-version }}
+          path: |
+            coverage/
+            test-results/
+
+  # Job 4: Integration Tests
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: unit-tests
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpass
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run database migrations
+        run: npm run migrate
+        env:
+          NODE_ENV: test
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: testdb
+          DB_USER: testuser
+          DB_PASSWORD: testpass
+
+      - name: Run integration tests
+        run: npm run test:integration
+        env:
+          NODE_ENV: test
+          JWT_SECRET: test_jwt_secret
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: testdb
+          DB_USER: testuser
+          DB_PASSWORD: testpass
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+
+      - name: Upload integration test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-test-results
+          path: test-results/
+
+  # Job 5: Build Docker Image
+  build-docker:
+    name: Build & Scan Docker Image
+    runs-on: ubuntu-latest
+    needs: [security-scan, integration-tests]
+    outputs:
+      image-tag: ${{ steps.meta.outputs.tags }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}/${{ env.DOCKER_IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha,prefix={{branch}}-
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/${{ env.DOCKER_IMAGE_NAME }}:buildcache
+          cache-to: type=registry,ref=${{ env.REGISTRY }}/${{ github.repository }}/${{ env.DOCKER_IMAGE_NAME }}:buildcache,mode=max
+          build-args: |
+            NODE_ENV=production
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ steps.meta.outputs.tags }}
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+          severity: 'CRITICAL,HIGH'
+
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+  # Job 6: Performance Testing
+  performance-tests:
+    name: Performance Testing
+    runs-on: ubuntu-latest
+    needs: build-docker
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install k6
+        run: |
+          sudo gpg -k
+          sudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update
+          sudo apt-get install k6
+
+      - name: Run performance tests
+        run: k6 run scripts/performance-test.js
+        continue-on-error: true
+
+      - name: Upload performance results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-results
+          path: performance-results/
+
+  # Job 7: Deploy to Staging
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [build-docker, performance-tests]
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: staging
+      url: https://staging.taskapi.com
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Deploy to ECS Staging
+        run: |
+          aws ecs update-service \
+            --cluster staging-cluster \
+            --service task-api-staging \
+            --force-new-deployment \
+            --region us-east-1
+
+      - name: Wait for deployment
+        run: |
+          aws ecs wait services-stable \
+            --cluster staging-cluster \
+            --services task-api-staging \
+            --region us-east-1
+
+      - name: Health check
+        run: |
+          for i in {1..10}; do
+            response=$(curl -s -o /dev/null -w "%{http_code}" https://staging.taskapi.com/api/health)
+            if [ $response -eq 200 ]; then
+              echo "Health check passed"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying..."
+            sleep 10
+          done
+          echo "Health check failed after 10 attempts"
+          exit 1
+
+      - name: Rollback on failure
+        if: failure()
+        run: |
+          echo "Deployment failed, initiating rollback..."
+          aws ecs update-service \
+            --cluster staging-cluster \
+            --service task-api-staging \
+            --task-definition task-api-staging:$(expr $(aws ecs describe-services --cluster staging-cluster --services task-api-staging --query 'services[0].deployments[1].taskDefinition' --output text | cut -d':' -f2) - 1) \
+            --force-new-deployment \
+            --region us-east-1
+
+      - name: Send Slack notification
+        if: always()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "Staging Deployment: ${{ job.status }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Staging Deployment*\nStatus: ${{ job.status }}\nCommit: ${{ github.sha }}\nAuthor: ${{ github.actor }}"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # Job 8: Deploy to Production
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: production
+      url: https://api.taskapi.com
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Deploy to ECS Production (Blue-Green)
+        run: |
+          # Update the service with new task definition
+          aws ecs update-service \
+            --cluster production-cluster \
+            --service task-api-production \
+            --force-new-deployment \
+            --deployment-configuration "maximumPercent=200,minimumHealthyPercent=100" \
+            --region us-east-1
+
+      - name: Wait for deployment
+        run: |
+          aws ecs wait services-stable \
+            --cluster production-cluster \
+            --services task-api-production \
+            --region us-east-1
+
+      - name: Health check
+        run: |
+          for i in {1..15}; do
+            response=$(curl -s -o /dev/null -w "%{http_code}" https://api.taskapi.com/api/health)
+            if [ $response -eq 200 ]; then
+              echo "Production health check passed"
+              exit 0
+            fi
+            echo "Attempt $i failed, retrying..."
+            sleep 15
+          done
+          echo "Health check failed"
+          exit 1
+
+      - name: Smoke tests
+        run: |
+          curl -f https://api.taskapi.com/api/health || exit 1
+          curl -f https://api.taskapi.com/api/metrics || exit 1
+
+      - name: Rollback on failure
+        if: failure()
+        run: |
+          echo "Production deployment failed, initiating rollback..."
+          aws ecs update-service \
+            --cluster production-cluster \
+            --service task-api-production \
+            --task-definition task-api-production:$(expr $(aws ecs describe-services --cluster production-cluster --services task-api-production --query 'services[0].deployments[1].taskDefinition' --output text | cut -d':' -f2) - 1) \
+            --force-new-deployment \
+            --region us-east-1
+
+      - name: Send notifications
+        if: always()
+        uses: slackapi/slack-github-action@v1
+        with:
+          payload: |
+            {
+              "text": "🚀 Production Deployment: ${{ job.status }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Production Deployment*\n\nStatus: *${{ job.status }}*\nCommit: `${{ github.sha }}`\nAuthor: ${{ github.actor }}\nURL: https://api.taskapi.com"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - name: Create GitHub Release
+        if: success()
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ github.run_number }}
+          release_name: Release v${{ github.run_number }}
+          body: |
+            Production deployment successful
+            Commit: ${{ github.sha }}
+            Deployed by: ${{ github.actor }}
+          draft: false
+          prerelease: false
