@@ -6,7 +6,6 @@
 
 ![Tech Stack](https://skillicons.dev/icons?i=nodejs,express,postgres,redis,docker,nginx,aws,github)
 
-[![CI/CD Pipeline](https://github.com/naveed-gung/task-api/actions/workflows/ci-cd-pipeline.yml/badge.svg)](https://github.com/username/task-api/actions/workflows/ci-cd-pipeline.yml)
 [![codecov](https://codecov.io/gh/username/task-api/branch/main/graph/badge.svg)](https://codecov.io/gh/username/task-api)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
