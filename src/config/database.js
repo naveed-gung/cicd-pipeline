@@ -4,13 +4,13 @@ const logger = require('../utils/logger');
 // Database configuration
 const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT) || 5432,
+  port: parseInt(process.env.DB_PORT, 10) || 5432,
   database: process.env.DB_NAME || 'taskdb',
   user: process.env.DB_USER || 'taskuser',
   password: process.env.DB_PASSWORD,
-  max: parseInt(process.env.DB_MAX_CONNECTIONS) || 20,
+  max: parseInt(process.env.DB_MAX_CONNECTIONS, 10) || 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 2000
 };
 
 // Create connection pool
@@ -72,9 +72,7 @@ const transaction = async (callback) => {
 };
 
 // Get a client from the pool
-const getClient = async () => {
-  return await pool.connect();
-};
+const getClient = async () => pool.connect();
 
 // Close pool
 const closePool = async () => {

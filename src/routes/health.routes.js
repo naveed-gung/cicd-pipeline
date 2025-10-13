@@ -1,4 +1,5 @@
 const express = require('express');
+
 const router = express.Router();
 const { testConnection } = require('../config/database');
 const logger = require('../utils/logger');
@@ -110,7 +111,7 @@ router.get('/metrics', (req, res) => {
 router.get('/ready', async (req, res) => {
   try {
     const dbHealthy = await testConnection();
-    
+
     if (dbHealthy) {
       res.status(200).json({
         success: true,

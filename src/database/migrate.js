@@ -1,6 +1,6 @@
-const { query, closePool } = require('../config/database');
 const fs = require('fs');
 const path = require('path');
+const { query, closePool } = require('../config/database');
 const logger = require('../utils/logger');
 
 /**
@@ -17,10 +17,12 @@ const runMigrations = async () => {
     // Split by semicolon and execute each statement
     const statements = sql
       .split(';')
-      .map(s => s.trim())
-      .filter(s => s.length > 0);
+      .map((s) => s.trim())
+      .filter((s) => s.length > 0);
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const statement of statements) {
+      // eslint-disable-next-line no-await-in-loop
       await query(statement);
     }
 

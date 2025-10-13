@@ -12,7 +12,9 @@ const getAllTasks = asyncHandler(async (req, res) => {
     return handleValidationError(errors.array());
   }
 
-  const { status, priority, page = 1, limit = 10 } = req.query;
+  const {
+    status, priority, page = 1, limit = 10
+  } = req.query;
   const offset = (page - 1) * limit;
 
   // Build query
@@ -25,13 +27,13 @@ const getAllTasks = asyncHandler(async (req, res) => {
   let paramCount = 1;
 
   if (status) {
-    paramCount++;
+    paramCount += 1;
     queryText += ` AND status = $${paramCount}`;
     queryParams.push(status);
   }
 
   if (priority) {
-    paramCount++;
+    paramCount += 1;
     queryText += ` AND priority = $${paramCount}`;
     queryParams.push(priority);
   }
@@ -45,7 +47,7 @@ const getAllTasks = asyncHandler(async (req, res) => {
   // Get total count
   let countQuery = 'SELECT COUNT(*) FROM tasks WHERE user_id = $1';
   const countParams = [req.user.id];
-  
+
   if (status) {
     countQuery += ' AND status = $2';
     countParams.push(status);
@@ -57,15 +59,15 @@ const getAllTasks = asyncHandler(async (req, res) => {
   }
 
   const countResult = await query(countQuery, countParams);
-  const total = parseInt(countResult.rows[0].count);
+  const total = parseInt(countResult.rows[0].count, 10);
 
   res.status(200).json({
     success: true,
     data: {
       tasks: result.rows,
       pagination: {
-        page: parseInt(page),
-        limit: parseInt(limit),
+        page: parseInt(page, 10),
+        limit: parseInt(limit, 10),
         total,
         pages: Math.ceil(total / limit)
       }
@@ -112,7 +114,9 @@ const createTask = asyncHandler(async (req, res) => {
     return handleValidationError(errors.array());
   }
 
-  const { title, description, status = 'pending', priority = 'medium', dueDate } = req.body;
+  const {
+    title, description, status = 'pending', priority = 'medium', dueDate
+  } = req.body;
 
   const result = await query(
     `INSERT INTO tasks (user_id, title, description, status, priority, due_date)
@@ -142,7 +146,9 @@ const updateTask = asyncHandler(async (req, res) => {
   }
 
   const { id } = req.params;
-  const { title, description, status, priority, dueDate } = req.body;
+  const {
+    title, description, status, priority, dueDate
+  } = req.body;
 
   // Check if task exists and belongs to user
   const existingTask = await query(
@@ -160,27 +166,27 @@ const updateTask = asyncHandler(async (req, res) => {
   let paramCount = 0;
 
   if (title !== undefined) {
-    paramCount++;
+    paramCount += 1;
     updates.push(`title = $${paramCount}`);
     values.push(title);
   }
   if (description !== undefined) {
-    paramCount++;
+    paramCount += 1;
     updates.push(`description = $${paramCount}`);
     values.push(description);
   }
   if (status !== undefined) {
-    paramCount++;
+    paramCount += 1;
     updates.push(`status = $${paramCount}`);
     values.push(status);
   }
   if (priority !== undefined) {
-    paramCount++;
+    paramCount += 1;
     updates.push(`priority = $${paramCount}`);
     values.push(priority);
   }
   if (dueDate !== undefined) {
-    paramCount++;
+    paramCount += 1;
     updates.push(`due_date = $${paramCount}`);
     values.push(dueDate);
   }
@@ -189,7 +195,7 @@ const updateTask = asyncHandler(async (req, res) => {
     throw new ApiError(400, 'No fields to update');
   }
 
-  updates.push(`updated_at = NOW()`);
+  updates.push('updated_at = NOW()');
   values.push(id, req.user.id);
 
   const result = await query(

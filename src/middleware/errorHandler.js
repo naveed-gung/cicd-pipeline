@@ -19,13 +19,10 @@ class ApiError extends Error {
 /**
  * Global error handler middleware
  */
-const errorHandler = (err, req, res, next) => {
-  let { statusCode, message } = err;
+const errorHandler = (err, req, res, _next) => {
+  const { statusCode = 500, message } = err;
 
-  // Default to 500 Internal Server Error
-  if (!statusCode) {
-    statusCode = 500;
-  }
+  // Default to 500 Internal Server Error handled above
 
   // Log error
   if (statusCode >= 500) {
@@ -79,12 +76,12 @@ const asyncHandler = (fn) => (req, res, next) => {
  * Validation error handler
  */
 const handleValidationError = (errors) => {
-  const formattedErrors = errors.map(err => ({
+  const formattedErrors = errors.map((err) => ({
     field: err.param,
     message: err.msg,
     value: err.value
   }));
-  
+
   throw new ApiError(400, 'Validation failed', true, { errors: formattedErrors });
 };
 
@@ -93,22 +90,22 @@ const handleValidationError = (errors) => {
  */
 const handleDatabaseError = (error) => {
   logger.error('Database error:', error);
-  
+
   // PostgreSQL unique constraint violation
   if (error.code === '23505') {
     return new ApiError(409, 'Resource already exists');
   }
-  
+
   // PostgreSQL foreign key constraint violation
   if (error.code === '23503') {
     return new ApiError(400, 'Referenced resource does not exist');
   }
-  
+
   // PostgreSQL not null constraint violation
   if (error.code === '23502') {
     return new ApiError(400, 'Required field is missing');
   }
-  
+
   // Default database error
   return new ApiError(500, 'Database operation failed');
 };

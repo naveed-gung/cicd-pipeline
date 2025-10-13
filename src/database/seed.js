@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 const { query, closePool } = require('../config/database');
 const logger = require('../utils/logger');
-const { v4: uuidv4 } = require('uuid');
 
 /**
  * Seed database with sample data
@@ -12,7 +12,7 @@ const seedDatabase = async () => {
 
     // Create demo users
     const hashedPassword = await bcrypt.hash('Password123', 12);
-    
+
     const users = [
       {
         id: uuidv4(),
@@ -29,7 +29,9 @@ const seedDatabase = async () => {
     ];
 
     // Insert users
+    // eslint-disable-next-line no-restricted-syntax
     for (const user of users) {
+      // eslint-disable-next-line no-await-in-loop
       await query(
         'INSERT INTO users (id, email, password, name) VALUES ($1, $2, $3, $4) ON CONFLICT (email) DO NOTHING',
         [user.id, user.email, user.password, user.name]
@@ -82,7 +84,9 @@ const seedDatabase = async () => {
     ];
 
     // Insert tasks
+    // eslint-disable-next-line no-restricted-syntax
     for (const task of tasks) {
+      // eslint-disable-next-line no-await-in-loop
       await query(
         'INSERT INTO tasks (user_id, title, description, status, priority, due_date) VALUES ($1, $2, $3, $4, $5, $6)',
         [task.user_id, task.title, task.description, task.status, task.priority, task.due_date]

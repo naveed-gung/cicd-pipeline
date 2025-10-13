@@ -8,7 +8,7 @@ const logger = require('../utils/logger');
 const authenticate = asyncHandler(async (req, res, next) => {
   // Get token from header
   const authHeader = req.headers.authorization;
-  
+
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     throw new ApiError(401, 'Authentication token required');
   }
@@ -18,7 +18,7 @@ const authenticate = asyncHandler(async (req, res, next) => {
   try {
     // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
+
     // Attach user to request
     req.user = {
       id: decoded.id,
@@ -44,10 +44,10 @@ const authenticate = asyncHandler(async (req, res, next) => {
  */
 const optionalAuth = asyncHandler(async (req, res, next) => {
   const authHeader = req.headers.authorization;
-  
+
   if (authHeader && authHeader.startsWith('Bearer ')) {
     const token = authHeader.split(' ')[1];
-    
+
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.user = {
@@ -60,7 +60,7 @@ const optionalAuth = asyncHandler(async (req, res, next) => {
       logger.debug('Optional auth failed, continuing without user');
     }
   }
-  
+
   next();
 });
 

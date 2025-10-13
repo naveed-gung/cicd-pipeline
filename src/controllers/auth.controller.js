@@ -119,14 +119,14 @@ const login = asyncHandler(async (req, res) => {
  * Refresh access token
  */
 const refreshToken = asyncHandler(async (req, res) => {
-  const { refreshToken } = req.body;
+  const { refreshToken: token } = req.body;
 
-  if (!refreshToken) {
+  if (!token) {
     throw new ApiError(400, 'Refresh token is required');
   }
 
   // Verify refresh token
-  const decoded = verifyRefreshToken(refreshToken);
+  const decoded = verifyRefreshToken(token);
 
   // Get user
   const result = await query(
@@ -190,7 +190,7 @@ const getProfile = asyncHandler(async (req, res) => {
 const logout = asyncHandler(async (req, res) => {
   // In a production app, you would invalidate the token here
   // For example, by storing it in a blacklist with Redis
-  
+
   logger.info('User logged out:', { userId: req.user.id });
 
   res.status(200).json({

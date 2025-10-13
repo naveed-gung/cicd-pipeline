@@ -9,6 +9,7 @@ const logger = require('./utils/logger');
 const errorHandler = require('./middleware/errorHandler');
 const { rateLimiter } = require('./middleware/rateLimiter');
 const swaggerDocs = require('./config/swagger');
+const { testConnection } = require('./config/database');
 
 // Import routes
 const authRoutes = require('./routes/auth.routes');
@@ -18,6 +19,7 @@ const imageRoutes = require('./routes/image.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
 const API_VERSION = process.env.API_VERSION || 'v1';
 
 // Security middleware
@@ -82,10 +84,24 @@ app.use((req, res) => {
 // Error handling middleware (must be last)
 app.use(errorHandler);
 
+// Start server
+const server = app.listen(PORT, HOST, async () => {
+  logger.info(`Server running on http://${HOST}:${PORT}`);
+  logger.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  logger.info(`API Version: ${API_VERSION}`);
+
+  // Test database connection
+  const dbConnected = await testConnection();
+  if (!dbConnected) {
+    logger.error('Failed to connect to database. Shutting down...');
+    process.exit(1);
+  }
+});
+
 // Graceful shutdown
 const gracefulShutdown = (signal) => {
   logger.info(`${signal} received. Shutting down gracefully...`);
-  
+
   server.close(() => {
     logger.info('HTTP server closed');
     process.exit(0);
@@ -97,15 +113,6 @@ const gracefulShutdown = (signal) => {
     process.exit(1);
   }, 30000);
 };
-
-// Start server
-const server = app.listen(PORT, () => {
-  logger.info(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-  logger.info(`API version: ${API_VERSION}`);
-  if (process.env.ENABLE_SWAGGER_DOCS === 'true') {
-    logger.info(`Swagger docs available at http://localhost:${PORT}/api-docs`);
-  }
-});
 
 // Handle shutdown signals
 process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
