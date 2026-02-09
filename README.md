@@ -56,17 +56,17 @@ Enterprise-level REST API demonstrating **advanced DevOps and CI/CD practices**.
 
 ## 🛠️ Tech Stack
 
-| Category | Technologies |
-|----------|-------------|
-| **Runtime** | Node.js 18+, Express.js |
-| **Database** | PostgreSQL 15, Redis 7 |
-| **Authentication** | JWT, bcrypt (12 rounds) |
-| **Testing** | Jest, Supertest, k6 |
-| **Security** | Helmet, express-validator, Snyk, CodeQL, Trivy |
-| **CI/CD** | GitHub Actions, Docker, AWS ECS |
-| **Monitoring** | CloudWatch, Winston Logger |
-| **Documentation** | Swagger/OpenAPI 3.0 |
-| **Containerization** | Docker, Docker Compose, Nginx |
+| Category             | Technologies                                   |
+| -------------------- | ---------------------------------------------- |
+| **Runtime**          | Node.js 18+, Express.js                        |
+| **Database**         | PostgreSQL 15, Redis 7                         |
+| **Authentication**   | JWT, bcryptjs (12 rounds)                      |
+| **Testing**          | Jest, Supertest, k6                            |
+| **Security**         | Helmet, express-validator, Snyk, CodeQL, Trivy |
+| **CI/CD**            | GitHub Actions, Docker, AWS ECS                |
+| **Monitoring**       | CloudWatch, Winston Logger                     |
+| **Documentation**    | Swagger/OpenAPI 3.0                            |
+| **Containerization** | Docker, Docker Compose, Nginx                  |
 
 ---
 
@@ -79,27 +79,27 @@ graph TB
     subgraph "Client Layer"
         Client[Web/Mobile Client]
     end
-    
+
     subgraph "Load Balancer"
         Nginx[Nginx Reverse Proxy<br/>Port 80]
     end
-    
+
     subgraph "Application Layer"
         API1[Node.js API Instance 1<br/>Port 3000]
         API2[Node.js API Instance 2<br/>Port 3000]
         API3[Node.js API Instance 3<br/>Port 3000]
     end
-    
+
     subgraph "Data Layer"
         PG[(PostgreSQL 15<br/>Primary Database)]
         Redis[(Redis 7<br/>Cache & Sessions)]
     end
-    
+
     subgraph "External Services"
         S3[AWS S3<br/>Image Storage]
         Lambda[AWS Lambda<br/>Image Processing]
     end
-    
+
     Client --> Nginx
     Nginx --> API1
     Nginx --> API2
@@ -114,7 +114,7 @@ graph TB
     API2 -.Image Upload.-> Lambda
     API3 -.Image Upload.-> Lambda
     Lambda --> S3
-    
+
     style Client fill:#e1f5ff
     style Nginx fill:#90ee90
     style API1 fill:#ffd700
@@ -144,7 +144,7 @@ graph LR
     L --> M{Success?}
     M -->|Yes| N[Complete]
     M -->|No| O[Auto Rollback]
-    
+
     style A fill:#4078c0
     style C fill:#d73a49
     style G fill:#6f42c1
@@ -306,17 +306,17 @@ Once the application is running, visit:
 
 ### Quick API Reference
 
-| Method | Endpoint | Description | Auth |
-|--------|----------|-------------|------|
-| GET | `/api/health` | Health check | No |
-| POST | `/api/v1/auth/register` | Register user | No |
-| POST | `/api/v1/auth/login` | Login user | No |
-| GET | `/api/v1/auth/me` | Get current user profile | Yes |
-| GET | `/api/v1/tasks` | List all tasks | Yes |
-| POST | `/api/v1/tasks` | Create new task | Yes |
-| GET | `/api/v1/tasks/:id` | Get specific task | Yes |
-| PUT | `/api/v1/tasks/:id` | Update task | Yes |
-| DELETE | `/api/v1/tasks/:id` | Delete task | Yes |
+| Method | Endpoint                | Description              | Auth |
+| ------ | ----------------------- | ------------------------ | ---- |
+| GET    | `/api/health`           | Health check             | No   |
+| POST   | `/api/v1/auth/register` | Register user            | No   |
+| POST   | `/api/v1/auth/login`    | Login user               | No   |
+| GET    | `/api/v1/auth/me`       | Get current user profile | Yes  |
+| GET    | `/api/v1/tasks`         | List all tasks           | Yes  |
+| POST   | `/api/v1/tasks`         | Create new task          | Yes  |
+| GET    | `/api/v1/tasks/:id`     | Get specific task        | Yes  |
+| PUT    | `/api/v1/tasks/:id`     | Update task              | Yes  |
+| DELETE | `/api/v1/tasks/:id`     | Delete task              | Yes  |
 
 ### Example Requests
 
@@ -434,7 +434,7 @@ graph TD
     J --> L{Smoke Tests}
     L -->|Pass| M[Complete ✓]
     L -->|Fail| N[Auto Rollback]
-    
+
     style A fill:#4078c0
     style B fill:#6f42c1
     style C fill:#d73a49
@@ -447,16 +447,16 @@ graph TD
 
 ### Stage Details
 
-| Stage | Tools | Duration | Purpose |
-|-------|-------|----------|---------|
-| **1. Code Quality** | ESLint, Prettier | ~1 min | Enforce coding standards |
-| **2. Security Scan** | npm audit, Snyk, CodeQL, Trivy | ~2 min | Detect vulnerabilities |
-| **3. Unit Tests** | Jest, Supertest | ~2 min | Verify code functionality |
-| **4. Build** | Docker multi-stage | ~3 min | Create optimized image |
-| **5. Integration** | Jest + Docker Compose | ~2 min | Test API endpoints |
-| **6. Performance** | k6 load testing | ~2 min | Validate performance |
-| **7. Staging** | AWS ECS Fargate | ~4 min | Deploy to test environment |
-| **8. Production** | AWS ECS blue-green | ~5 min | Zero-downtime deployment |
+| Stage                | Tools                          | Duration | Purpose                    |
+| -------------------- | ------------------------------ | -------- | -------------------------- |
+| **1. Code Quality**  | ESLint, Prettier               | ~1 min   | Enforce coding standards   |
+| **2. Security Scan** | npm audit, Snyk, CodeQL, Trivy | ~2 min   | Detect vulnerabilities     |
+| **3. Unit Tests**    | Jest, Supertest                | ~2 min   | Verify code functionality  |
+| **4. Build**         | Docker multi-stage             | ~3 min   | Create optimized image     |
+| **5. Integration**   | Jest + Docker Compose          | ~2 min   | Test API endpoints         |
+| **6. Performance**   | k6 load testing                | ~2 min   | Validate performance       |
+| **7. Staging**       | AWS ECS Fargate                | ~4 min   | Deploy to test environment |
+| **8. Production**    | AWS ECS blue-green             | ~5 min   | Zero-downtime deployment   |
 
 **Total Pipeline Time:** ~21 minutes
 
@@ -534,11 +534,13 @@ The CI/CD pipeline automatically deploys:
 ### Environment Configuration
 
 **Staging:**
+
 - URL: `https://staging.taskapi.com`
 - Database: RDS staging instance
 - Auto-deploy enabled
 
 **Production:**
+
 - URL: `https://api.taskapi.com`
 - Database: RDS production instance
 - Manual approval required
@@ -588,6 +590,7 @@ Structured JSON logging with Winston:
 - **Debug level**: Detailed debugging (development only)
 
 Logs are stored in:
+
 - `logs/error.log` - Error logs only
 - `logs/combined.log` - All application logs
 
@@ -655,27 +658,48 @@ cicd-pipeline/
 
 ## 🔧 Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `npm start` | Start production server |
-| `npm run dev` | Start development server with hot reload |
-| `npm test` | Run all tests |
-| `npm run test:watch` | Run tests in watch mode |
-| `npm run test:integration` | Run integration tests only |
-| `npm run test:coverage` | Run tests with coverage report |
-| `npm run test:performance` | Run k6 performance tests |
-| `npm run lint` | Run ESLint |
-| `npm run lint:fix` | Fix ESLint errors automatically |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Check code formatting |
-| `npm run migrate` | Run database migrations |
-| `npm run migrate:rollback` | Rollback last migration |
-| `npm run seed` | Seed database with sample data |
-| `npm run db:backup` | Backup database |
+| Script                     | Description                              |
+| -------------------------- | ---------------------------------------- |
+| `npm start`                | Start production server                  |
+| `npm run dev`              | Start development server with hot reload |
+| `npm test`                 | Run all tests                            |
+| `npm run test:watch`       | Run tests in watch mode                  |
+| `npm run test:integration` | Run integration tests only               |
+| `npm run test:coverage`    | Run tests with coverage report           |
+| `npm run test:performance` | Run k6 performance tests                 |
+| `npm run lint`             | Run ESLint                               |
+| `npm run lint:fix`         | Fix ESLint errors automatically          |
+| `npm run format`           | Format code with Prettier                |
+| `npm run format:check`     | Check code formatting                    |
+| `npm run migrate`          | Run database migrations                  |
+| `npm run migrate:rollback` | Rollback last migration                  |
+| `npm run seed`             | Seed database with sample data           |
+| `npm run db:backup`        | Backup database                          |
 
 ---
 
-## 🐛 Troubleshooting
+## � Bugfixes & Changes
+
+The following issues were identified and fixed to get the project running:
+
+| #   | File                                                         | Issue                                                                                                    | Fix                                                           |
+| --- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| 1   | `.env`                                                       | Missing environment config file — no DB credentials, JWT secrets, etc.                                   | Created `.env` with all required variables                    |
+| 2   | `package.json`                                               | `bcrypt` (native C++ addon) fails to compile on paths with spaces                                        | Replaced with `bcryptjs` (pure JS, drop-in compatible)        |
+| 3   | `src/server.js`                                              | `errorHandler` imported as whole module object instead of destructured function — crashes on `app.use()` | Changed to `const { errorHandler } = require(...)`            |
+| 4   | `src/server.js`                                              | Server called `process.exit(1)` when DB unavailable, making local dev impossible                         | Only exits in production; warns in dev                        |
+| 5   | `src/routes/image.routes.js`                                 | Imported `{ auth }` but middleware exports `{ authenticate }` — crashes on startup                       | Fixed all 5 route handler references                          |
+| 6   | `src/middleware/errorHandler.js`                             | `ApiError` constructor used `stack` param for details, overwriting the real stack trace                  | Refactored to use a separate `details` property               |
+| 7   | `docker-compose.yml`                                         | API healthcheck URL was `/api/v1/health` but actual route is `/api/health`                               | Fixed URL path                                                |
+| 8   | `Dockerfile`                                                 | Same wrong healthcheck URL as above                                                                      | Fixed URL path                                                |
+| 9   | `src/controllers/auth.controller.js`, `src/database/seed.js` | `require('bcrypt')` references after package swap                                                        | Updated to `require('bcryptjs')`                              |
+| 10  | `logs/`                                                      | Missing directory — Winston logger fails to write log files                                              | Created `logs/` directory with `.gitkeep`                     |
+| 11  | `package-lock.json`                                          | Missing lock file — GitHub Actions `npm ci` and `cache: 'npm'` both require it                           | Generated via `npm install`                                   |
+| 12  | `.github/workflows/ci-cd-pipeline.yml`                       | Pipeline auto-triggers on every push/PR                                                                  | Disabled auto-triggers; now manual-only (`workflow_dispatch`) |
+
+---
+
+## �🐛 Troubleshooting
 
 ### Docker Issues
 
