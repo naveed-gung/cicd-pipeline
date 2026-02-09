@@ -6,7 +6,7 @@ const morgan = require('morgan');
 require('dotenv').config();
 
 const logger = require('./utils/logger');
-const errorHandler = require('./middleware/errorHandler');
+const { errorHandler } = require('./middleware/errorHandler');
 const { rateLimiter } = require('./middleware/rateLimiter');
 const swaggerDocs = require('./config/swagger');
 const { testConnection } = require('./config/database');
@@ -93,8 +93,12 @@ const server = app.listen(PORT, HOST, async () => {
   // Test database connection
   const dbConnected = await testConnection();
   if (!dbConnected) {
-    logger.error('Failed to connect to database. Shutting down...');
-    process.exit(1);
+    if (process.env.NODE_ENV === 'production') {
+      logger.error('Failed to connect to database. Shutting down...');
+      process.exit(1);
+    } else {
+      logger.warn('Database not available. Some features will not work.');
+    }
   }
 });
 

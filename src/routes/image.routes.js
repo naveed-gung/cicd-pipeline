@@ -2,16 +2,16 @@ const express = require('express');
 
 const router = express.Router();
 const axios = require('axios');
-const { auth } = require('../middleware/auth');
+const { authenticate } = require('../middleware/auth');
 const logger = require('../utils/logger');
 
 // Get serverless API config from environment
 const { SERVERLESS_API_URL } = process.env;
 const { SERVERLESS_API_KEY } = process.env;
 
-// Validate configuration
+// Validate configuration (only warn, don't block startup)
 if (!SERVERLESS_API_URL || !SERVERLESS_API_KEY) {
-  logger.warn('Serverless API configuration not found. Image routes will not work.');
+  logger.warn('Serverless API configuration not found. Image routes will return 503 until configured.');
 }
 
 /**
@@ -46,7 +46,7 @@ if (!SERVERLESS_API_URL || !SERVERLESS_API_KEY) {
  *       500:
  *         description: Server error
  */
-router.post('/upload', auth, async (req, res, next) => {
+router.post('/upload', authenticate, async (req, res, next) => {
   try {
     if (!SERVERLESS_API_URL || !SERVERLESS_API_KEY) {
       return res.status(503).json({
@@ -145,7 +145,7 @@ router.post('/upload', auth, async (req, res, next) => {
  *       500:
  *         description: Server error
  */
-router.get('/', auth, async (req, res, next) => {
+router.get('/', authenticate, async (req, res, next) => {
   try {
     if (!SERVERLESS_API_URL || !SERVERLESS_API_KEY) {
       return res.status(503).json({
@@ -221,7 +221,7 @@ router.get('/', auth, async (req, res, next) => {
  *       500:
  *         description: Server error
  */
-router.get('/:id', auth, async (req, res, next) => {
+router.get('/:id', authenticate, async (req, res, next) => {
   try {
     if (!SERVERLESS_API_URL || !SERVERLESS_API_KEY) {
       return res.status(503).json({
@@ -296,7 +296,7 @@ router.get('/:id', auth, async (req, res, next) => {
  *       500:
  *         description: Server error
  */
-router.delete('/:id', auth, async (req, res, next) => {
+router.delete('/:id', authenticate, async (req, res, next) => {
   try {
     if (!SERVERLESS_API_URL || !SERVERLESS_API_KEY) {
       return res.status(503).json({
@@ -372,7 +372,7 @@ router.delete('/:id', auth, async (req, res, next) => {
  *       500:
  *         description: Server error
  */
-router.get('/:id/status', auth, async (req, res, next) => {
+router.get('/:id/status', authenticate, async (req, res, next) => {
   try {
     if (!SERVERLESS_API_URL || !SERVERLESS_API_KEY) {
       return res.status(503).json({

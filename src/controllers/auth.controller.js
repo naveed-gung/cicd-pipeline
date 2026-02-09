@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { validationResult } = require('express-validator');
 const { query } = require('../config/database');
 const { ApiError, asyncHandler, handleValidationError } = require('../middleware/errorHandler');
